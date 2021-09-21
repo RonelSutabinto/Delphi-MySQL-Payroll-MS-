@@ -1,0 +1,69 @@
+unit EmpnoAccount;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, DB, MemDS, DBAccess, MyAccess, NxCollection, Grids, DBGrids,
+  CRGrid, ExtCtrls;
+
+type
+  TEmpNoAccounts = class(TForm)
+    quEmpnoAcc: TMyQuery;
+    NxHeaderPanel1: TNxHeaderPanel;
+    dsquEmpnoAcc: TMyDataSource;
+    quEmpnoAcclastname: TStringField;
+    quEmpnoAccfirstname: TStringField;
+    quEmpnoAccmiddleinitial: TStringField;
+    Panel1: TPanel;
+    CRDBGrid1: TCRDBGrid;
+    quEmpnoAccdescription: TStringField;
+    NxButton1: TNxButton;
+    NxButton2: TNxButton;
+    NxButton3: TNxButton;
+    procedure NxButton1Click(Sender: TObject);
+    procedure NxButton2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure NxButton3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  EmpNoAccounts: TEmpNoAccounts;
+
+implementation
+
+uses Data;
+
+{$R *.dfm}
+
+procedure TEmpNoAccounts.NxButton1Click(Sender: TObject);
+begin
+  quEmpnoAcc.Close;
+  quEmpnoAcc.ParamByName('stat').Text := 'R';
+  quEmpnoAcc.Open;
+end;
+
+procedure TEmpNoAccounts.NxButton2Click(Sender: TObject);
+begin
+  quEmpnoAcc.Close;
+  quEmpnoAcc.ParamByName('stat').Text := 'C';
+  quEmpnoAcc.Open;
+end;
+
+procedure TEmpNoAccounts.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+   Action := caFree;
+   EmpNoAccounts := Nil;
+end;
+
+procedure TEmpNoAccounts.NxButton3Click(Sender: TObject);
+begin
+ Close;
+end;
+
+end.

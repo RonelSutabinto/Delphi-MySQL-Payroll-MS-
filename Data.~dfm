@@ -1,0 +1,1464 @@
+object PayrollData: TPayrollData
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Height = 766
+  Width = 1301
+  object MyConnection1: TMyConnection
+    Database = 'zanecopayroll'
+    Username = 'root'
+    Password = 'blaise'
+    Server = 'server'
+    Connected = True
+    LoginPrompt = False
+    Left = 56
+    Top = 352
+  end
+  object Users: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from users')
+    Left = 40
+    Top = 24
+    object UsersUserPassWord: TStringField
+      FieldName = 'UserPassWord'
+      Size = 10
+    end
+    object UsersUserName: TStringField
+      FieldName = 'UserName'
+      Size = 30
+    end
+    object UsersUserID: TStringField
+      FieldName = 'UserID'
+      Size = 30
+    end
+    object UsersUserPic: TBlobField
+      FieldName = 'UserPic'
+    end
+    object UsersPosition: TStringField
+      FieldName = 'Position'
+      Size = 30
+    end
+    object UsersUserRestriction: TStringField
+      FieldName = 'UserRestriction'
+    end
+    object UsersIdUsers: TLargeintField
+      FieldName = 'IdUsers'
+    end
+  end
+  object dsUsers: TDataSource
+    DataSet = Users
+    Left = 40
+    Top = 99
+  end
+  object Company: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from company')
+    Left = 40
+    Top = 175
+    object Companyidcompany: TLargeintField
+      FieldName = 'idcompany'
+    end
+    object Companycompanyname: TStringField
+      FieldName = 'companyname'
+      Size = 50
+    end
+    object Companyaddress: TStringField
+      FieldName = 'address'
+      Size = 50
+    end
+    object Companylogo: TBlobField
+      FieldName = 'logo'
+    end
+    object Companyfilename: TStringField
+      FieldName = 'filename'
+      Size = 50
+    end
+    object Companycompanyacro: TStringField
+      FieldName = 'companyacro'
+      Size = 30
+    end
+    object CompanysssNumber: TStringField
+      FieldName = 'sssNumber'
+      Size = 15
+    end
+    object CompanyphilHealthNumber: TStringField
+      FieldName = 'philHealthNumber'
+      Size = 15
+    end
+    object CompanypagibigNumber: TStringField
+      FieldName = 'pagibigNumber'
+      Size = 15
+    end
+    object Companytin: TStringField
+      FieldName = 'tin'
+      Size = 15
+    end
+    object CompanyZipCode: TStringField
+      FieldName = 'ZipCode'
+      Size = 15
+    end
+    object CompanyContactNum: TStringField
+      FieldName = 'ContactNum'
+      Size = 15
+    end
+  end
+  object dsCompany: TDataSource
+    DataSet = Company
+    Left = 40
+    Top = 250
+  end
+  object DI: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from deductionindex'
+      'where description like :description'
+      'order by iddeductionindex')
+    Left = 290
+    Top = 24
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'description'
+      end>
+    object DIiddeductionindex: TLargeintField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'iddeductionindex'
+      Origin = 'deductionindex.iddeductionindex'
+    end
+    object DIdescription: TStringField
+      FieldName = 'description'
+      Origin = 'deductionindex.description'
+      Size = 50
+    end
+    object DIOtherSpec: TStringField
+      FieldName = 'OtherSpec'
+      Origin = 'deductionindex.OtherSpec'
+      Size = 50
+    end
+    object DIAcode: TStringField
+      FieldName = 'Acode'
+    end
+  end
+  object dsDI: TDataSource
+    DataSet = DI
+    Left = 290
+    Top = 99
+  end
+  object DISched: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from deductionschedule'
+      'order by rangefrom')
+    MasterSource = dsDI
+    MasterFields = 'iddeductionindex;description'
+    DetailFields = 'deductionindex;description'
+    Left = 413
+    Top = 24
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'iddeductionindex'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'description'
+      end>
+    object DISchediddeductionschedule: TLargeintField
+      FieldName = 'iddeductionschedule'
+    end
+    object DIScheddeductionindex: TFloatField
+      FieldName = 'deductionindex'
+    end
+    object DIScheddescription: TStringField
+      FieldName = 'description'
+      Size = 50
+    end
+    object DISchedrangefrom: TFloatField
+      FieldName = 'rangefrom'
+    end
+    object DISchedrangeto: TFloatField
+      FieldName = 'rangeto'
+    end
+    object DISchedemployeecontribution: TFloatField
+      FieldName = 'employeecontribution'
+    end
+    object DISchedemployercontribution: TFloatField
+      FieldName = 'employercontribution'
+    end
+    object DISchedemployeecompensation: TFloatField
+      FieldName = 'employeecompensation'
+    end
+    object DISchedOtherRepRef: TFloatField
+      FieldName = 'OtherRepRef'
+    end
+  end
+  object dsDISched: TDataSource
+    DataSet = DISched
+    Left = 413
+    Top = 99
+  end
+  object Loans: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO loanschedule'
+      
+        '  (idemployee, empnumber, Name, description, datereleased, princ' +
+        'ipal, interest, totalloan, months, monthlydeduction)'
+      'VALUES'
+      
+        '  (:idemployee, :empnumber, :Name, :description, :datereleased, ' +
+        ':principal, :interest, :totalloan, :months, :monthlydeduction)')
+    SQLDelete.Strings = (
+      'DELETE FROM loanschedule'
+      'WHERE'
+      '  idloanschedule = :Old_idloanschedule')
+    SQLUpdate.Strings = (
+      'UPDATE loanschedule'
+      'SET'
+      
+        '  idemployee = :idemployee, empnumber = :empnumber, Name = :Name' +
+        ', description = :description, datereleased = :datereleased, prin' +
+        'cipal = :principal, interest = :interest, totalloan = :totalloan' +
+        ', months = :months, monthlydeduction = :monthlydeduction'
+      'WHERE'
+      '  idloanschedule = :Old_idloanschedule')
+    SQLRefresh.Strings = (
+      
+        'SELECT idemployee, empnumber, Name, description, datereleased, p' +
+        'rincipal, interest, totalloan, months, monthlydeduction FROM loa' +
+        'nschedule'
+      'WHERE'
+      
+        '  empnumber = :empnumber and datereleased = :datereleased and de' +
+        'scription = :description')
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select loanschedule.*,'
+      '       sum(pmdeduction.actualremittance) totalpayment'
+      'from loanschedule'
+      
+        'left join pmdeduction on (loanschedule.idloanschedule = pmdeduct' +
+        'ion.loanschedule)'
+      '/*where loanschedule.name like :name and'
+      '      loanschedule.description = :Description*/'
+      'group by idloanschedule'
+      'order by loanschedule, name')
+    OnCalcFields = LoansCalcFields
+    Left = 536
+    Top = 24
+    object Loansidloanschedule: TLargeintField
+      FieldName = 'idloanschedule'
+    end
+    object Loansempnumber: TStringField
+      FieldName = 'empnumber'
+      Size = 15
+    end
+    object LoansName: TStringField
+      FieldName = 'Name'
+      Size = 50
+    end
+    object Loansdescription: TStringField
+      FieldName = 'description'
+      Size = 50
+    end
+    object Loansdatereleased: TDateField
+      FieldName = 'datereleased'
+    end
+    object Loansprincipal: TFloatField
+      FieldName = 'principal'
+      currency = True
+    end
+    object Loansinterest: TFloatField
+      FieldName = 'interest'
+      currency = True
+    end
+    object Loanstotalloan: TFloatField
+      FieldName = 'totalloan'
+      currency = True
+    end
+    object Loansmonths: TLargeintField
+      FieldName = 'months'
+    end
+    object Loansmonthlydeduction: TFloatField
+      FieldName = 'monthlydeduction'
+      currency = True
+    end
+    object Loanstotalpayment: TFloatField
+      FieldName = 'totalpayment'
+      currency = True
+    end
+    object Loansloanstatus: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'loanstatus'
+      Calculated = True
+    end
+    object Loansidemployee: TFloatField
+      FieldName = 'idemployee'
+    end
+  end
+  object dsLoans: TDataSource
+    DataSet = Loans
+    Left = 536
+    Top = 99
+  end
+  object Tax: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from wtax'
+      
+        'where (description like :description or wTaxStatus like :descrip' +
+        'tion)and'
+      '      taxtabletype like :taxtabletype'
+      'order by wtaxstatus')
+    Left = 416
+    Top = 176
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'description'
+        Value = 's1'
+      end
+      item
+        DataType = ftString
+        Name = 'description'
+        Value = 's1'
+      end
+      item
+        DataType = ftString
+        Name = 'taxtabletype'
+        Value = 'Monthly'
+      end>
+    object Taxidwtax: TLargeintField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'idwtax'
+      Origin = 'wtax.idwtax'
+    end
+    object Taxwtaxstatus: TStringField
+      FieldName = 'wtaxstatus'
+      Origin = 'wtax.wtaxstatus'
+      Size = 10
+    end
+    object Taxdescription: TStringField
+      FieldName = 'description'
+      Origin = 'wtax.description'
+      Size = 50
+    end
+    object Taxexemptionamount: TFloatField
+      FieldName = 'exemptionamount'
+      Origin = 'wtax.exemptionamount'
+      currency = True
+    end
+    object Taxtaxtabletype: TStringField
+      FieldName = 'taxtabletype'
+      Size = 10
+    end
+  end
+  object dsTax: TDataSource
+    DataSet = Tax
+    Left = 414
+    Top = 248
+  end
+  object TaxSched: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from wtaxschedule'
+      'order by rangefrom')
+    MasterSource = dsTax
+    MasterFields = 'idwtax;wtaxstatus'
+    DetailFields = 'idwtax;wtaxstatus'
+    Left = 542
+    Top = 176
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idwtax'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'wtaxstatus'
+      end>
+    object TaxSchedidwtaxschedule: TLargeintField
+      FieldName = 'idwtaxschedule'
+    end
+    object TaxSchedidwtax: TFloatField
+      FieldName = 'idwtax'
+    end
+    object TaxSchedwtaxstatus: TStringField
+      FieldName = 'wtaxstatus'
+      Size = 10
+    end
+    object TaxSchedrangefrom: TFloatField
+      FieldName = 'rangefrom'
+    end
+    object TaxSchedrangeto: TFloatField
+      FieldName = 'rangeto'
+    end
+    object TaxSchedfixtax: TFloatField
+      FieldName = 'fixtax'
+    end
+    object TaxSchedexcesspercent: TFloatField
+      FieldName = 'excesspercent'
+    end
+    object TaxSchedOverTimeMultiplier: TFloatField
+      FieldName = 'OverTimeMultiplier'
+    end
+  end
+  object dsTaxSched: TDataSource
+    DataSet = TaxSched
+    Left = 540
+    Top = 248
+  end
+  object PayrollMaster: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO payrollmaster'
+      
+        '  (idemployee, paymonth, description, empnumber, name, deptcode,' +
+        ' basicpay, Differential, premiumpay, RegOtPay, SpcOTPay, RestOtP' +
+        'ay, RestOtExPay, LegOTPay, LegOtExPay, LegRestOtPay, SpcOtExPay,' +
+        ' nsd, undertime, absences, riceallowance, hazard, lighting, Mont' +
+        'h13, Bonus, OtherPay, PAGIBIGCont, SSSCont, PhilHealth, WTax, Ot' +
+        'herDeduction, netpay, paycode, wtaxstatus, taxable, RegOtHrs, Sp' +
+        'cOTHrs, RestOtHrs, RestOtExHrs, LegOTHrs, LegOtExHrs, LegRestOtE' +
+        'xPay, LegRestOtHrs, LegRestOtExHrs, SpcOtExHrs, NSDHrs, Undertim' +
+        'eHrs, AbsencesDays, PremiumDays, TardiHrs, DailyRate, employeest' +
+        'atus, DayPresent, Tardi, perMonetize, perLeaveCredits, isLock, N' +
+        'umUnpaidDays, UnPaidRate, prorate, prerate,spcrestotrate,spcrest' +
+        'hrs,spcrestpay)'
+      'VALUES'
+      
+        '  (:idemployee, :paymonth, :description, :empnumber, :name, :dep' +
+        'tcode, :basicpay, :Differential, :premiumpay, :RegOtPay, :SpcOTP' +
+        'ay, :RestOtPay, :RestOtExPay, :LegOTPay, :LegOtExPay, :LegRestOt' +
+        'Pay, :SpcOtExPay, :nsd, :undertime, :absences, :riceallowance, :' +
+        'hazard, :lighting, :Month13, :Bonus, :OtherPay, :PAGIBIGCont, :S' +
+        'SSCont, :PhilHealth, :WTax, :OtherDeduction, :netpay, :paycode, ' +
+        ':wtaxstatus, :taxable, :RegOtHrs, :SpcOTHrs, :RestOtHrs, :RestOt' +
+        'ExHrs, :LegOTHrs, :LegOtExHrs, :LegRestOtExPay, :LegRestOtHrs, :' +
+        'LegRestOtExHrs, :SpcOtExHrs, :NSDHrs, :UndertimeHrs, :AbsencesDa' +
+        'ys, :PremiumDays, :TardiHrs, :DailyRate, :employeestatus, :DayPr' +
+        'esent, :Tardi, :perMonetize, :perLeaveCredits, :isLock, :NumUnpa' +
+        'idDays, :UnPaidRate, :prorate, :prerate, :spcrestotrate,:spcrest' +
+        'hrs,:spcrestpay)')
+    SQLDelete.Strings = (
+      'INSERT INTO payrollmasterdeleted'
+      
+        '  (idemployee, paymonth, description, empnumber, name, deptcode,' +
+        ' basicpay, Differential, premiumpay, RegOtPay, SpcOTPay, RestOtP' +
+        'ay, RestOtExPay, LegOTPay, LegOtExPay, LegRestOtPay, SpcOtExPay,' +
+        ' nsd, undertime, absences, riceallowance, hazard, lighting, Mont' +
+        'h13, Bonus, OtherPay, PAGIBIGCont, SSSCont, PhilHealth, WTax, Ot' +
+        'herDeduction, netpay, paycode, wtaxstatus, taxable, RegOtHrs, Sp' +
+        'cOTHrs, RestOtHrs, RestOtExHrs, LegOTHrs, LegOtExHrs, LegRestOtE' +
+        'xPay, LegRestOtHrs, LegRestOtExHrs, SpcOtExHrs, NSDHrs, Undertim' +
+        'eHrs, AbsencesDays, PremiumDays, TardiHrs, DailyRate, employeest' +
+        'atus, DayPresent, Tardi, perMonetize, perLeaveCredits, RegOTRate' +
+        ', SpcOTRate, SpcExOTRate, LegOTRate, LegExOTRate, LegRestOTRate,' +
+        ' LegRestExOTRate, isLock, NumUnpaidDays, UnPaidRate)'
+      'select'
+      
+        '   idemployee, paymonth, description, empnumber, name, deptcode,' +
+        ' basicpay, Differential, premiumpay, RegOtPay, SpcOTPay, RestOtP' +
+        'ay, RestOtExPay, LegOTPay, LegOtExPay, LegRestOtPay, SpcOtExPay,' +
+        ' nsd, undertime, absences, riceallowance, hazard, lighting, Mont' +
+        'h13, Bonus, OtherPay, PAGIBIGCont, SSSCont, PhilHealth, WTax, Ot' +
+        'herDeduction, netpay, paycode, wtaxstatus, taxable, RegOtHrs, Sp' +
+        'cOTHrs, RestOtHrs, RestOtExHrs, LegOTHrs, LegOtExHrs, LegRestOtE' +
+        'xPay, LegRestOtHrs, LegRestOtExHrs, SpcOtExHrs, NSDHrs, Undertim' +
+        'eHrs, AbsencesDays, PremiumDays, TardiHrs, DailyRate, employeest' +
+        'atus, DayPresent, Tardi, perMonetize, perLeaveCredits, RegOTRate' +
+        ', SpcOTRate, SpcExOTRate, LegOTRate, LegExOTRate, LegRestOTRate,' +
+        ' LegRestExOTRate, isLock, NumUnpaidDays, UnPaidRate'
+      'from payrollmaster'
+      'where idpayrollmaster = :Old_idpayrollmaster;'
+      'DELETE FROM payrollmaster'
+      'WHERE'
+      '  idpayrollmaster = :Old_idpayrollmaster;')
+    SQLUpdate.Strings = (
+      'UPDATE payrollmaster'
+      'SET'
+      
+        '  idemployee = :idemployee, paymonth = :paymonth, description = ' +
+        ':description, empnumber = :empnumber, name = :name, deptcode = :' +
+        'deptcode, basicpay = :basicpay, Differential = :Differential, pr' +
+        'emiumpay = :premiumpay, RegOtPay = :RegOtPay, SpcOTPay = :SpcOTP' +
+        'ay, RestOtPay = :RestOtPay, RestOtExPay = :RestOtExPay, LegOTPay' +
+        ' = :LegOTPay, LegOtExPay = :LegOtExPay, LegRestOtPay = :LegRestO' +
+        'tPay, SpcOtExPay = :SpcOtExPay, nsd = :nsd, undertime = :underti' +
+        'me, absences = :absences, riceallowance = :riceallowance, hazard' +
+        ' = :hazard, lighting = :lighting, Month13 = :Month13, Bonus = :B' +
+        'onus, OtherPay = :OtherPay, PAGIBIGCont = :PAGIBIGCont, SSSCont ' +
+        '= :SSSCont, PhilHealth = :PhilHealth, WTax = :WTax, OtherDeducti' +
+        'on = :OtherDeduction, netpay = :netpay, paycode = :paycode, wtax' +
+        'status = :wtaxstatus, taxable = :taxable, RegOtHrs = :RegOtHrs, ' +
+        'SpcOTHrs = :SpcOTHrs, RestOtHrs = :RestOtHrs, RestOtExHrs = :Res' +
+        'tOtExHrs, LegOTHrs = :LegOTHrs, LegOtExHrs = :LegOtExHrs, LegRes' +
+        'tOtExPay = :LegRestOtExPay, LegRestOtHrs = :LegRestOtHrs, LegRes' +
+        'tOtExHrs = :LegRestOtExHrs, SpcOtExHrs = :SpcOtExHrs, NSDHrs = :' +
+        'NSDHrs, UndertimeHrs = :UndertimeHrs, AbsencesDays = :AbsencesDa' +
+        'ys, PremiumDays = :PremiumDays, TardiHrs = :TardiHrs, DailyRate ' +
+        '= :DailyRate, employeestatus = :employeestatus, DayPresent = :Da' +
+        'yPresent, Tardi = :Tardi, perMonetize = :perMonetize, perLeaveCr' +
+        'edits = :perLeaveCredits, isLock = :isLock, NumUnpaidDays = :Num' +
+        'UnpaidDays, UnPaidRate = :UnPaidRate, prorate = :prorate, prerat' +
+        'e = :prerate, spcrestotrate = :spcrestotrate,spcresthrs = :spcre' +
+        'sthrs,spcrestpay = :spcrestpay'
+      'WHERE'
+      '  idpayrollmaster = :Old_idpayrollmaster')
+    SQLRefresh.Strings = (
+      
+        'SELECT idemployee, paymonth, description, empnumber, name, deptc' +
+        'ode, basicpay, Differential, premiumpay, RegOtPay, SpcOTPay, Res' +
+        'tOtPay, RestOtExPay, LegOTPay, LegOtExPay, LegRestOtPay, SpcOtEx' +
+        'Pay, nsd, undertime, absences, riceallowance, hazard, lighting, ' +
+        'Month13, Bonus, OtherPay, PAGIBIGCont, SSSCont, PhilHealth, WTax' +
+        ', OtherDeduction, netpay, paycode, wtaxstatus, taxable, RegOtHrs' +
+        ', SpcOTHrs, RestOtHrs, RestOtExHrs, LegOTHrs, LegOtExHrs, LegRes' +
+        'tOtExPay, LegRestOtHrs, LegRestOtExHrs, SpcOtExHrs, NSDHrs, Unde' +
+        'rtimeHrs, AbsencesDays, PremiumDays, TardiHrs, DailyRate, employ' +
+        'eestatus, DayPresent, Tardi, perMonetize, perLeaveCredits, RegOT' +
+        'Rate, SpcOTRate, SpcExOTRate, LegOTRate, LegExOTRate, LegRestOTR' +
+        'ate, LegRestExOTRate, isLock FROM payrollmaster'
+      'WHERE'
+      '  idpayrollmaster = :idpayrollmaster')
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select p.*,d.area from payrollmaster p'
+      'left join department d'
+      'on d.departmentcode = p.deptcode'
+      'where p.name like :name and'
+      '      p.paymonth = :paymonth and'
+      '      p.description like :Description and'
+      '      p.Paycode = :paycode'
+      'order by p.deptcode, p.name')
+    Left = 664
+    Top = 24
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'name'
+        Value = '%ZOZO%'
+      end
+      item
+        DataType = ftString
+        Name = 'paymonth'
+        Value = '2010-10-31'
+      end
+      item
+        DataType = ftString
+        Name = 'Description'
+        Value = 'Regular Payroll'
+      end
+      item
+        DataType = ftInteger
+        Name = 'paycode'
+        Value = 1
+      end>
+    object PayrollMasteridpayrollmaster: TLargeintField
+      FieldName = 'idpayrollmaster'
+    end
+    object PayrollMasteridemployee: TFloatField
+      FieldName = 'idemployee'
+    end
+    object PayrollMasterpaymonth: TDateField
+      FieldName = 'paymonth'
+    end
+    object PayrollMasterdescription: TStringField
+      FieldName = 'description'
+      Size = 50
+    end
+    object PayrollMasterempnumber: TStringField
+      FieldName = 'empnumber'
+      Size = 15
+    end
+    object PayrollMastername: TStringField
+      FieldName = 'name'
+      Size = 50
+    end
+    object PayrollMasterdeptcode: TStringField
+      FieldName = 'deptcode'
+      Size = 30
+    end
+    object PayrollMasterbasicpay: TFloatField
+      FieldName = 'basicpay'
+      currency = True
+    end
+    object PayrollMasterDifferential: TFloatField
+      FieldName = 'Differential'
+      currency = True
+    end
+    object PayrollMasterUnpaidAmt: TFloatField
+      FieldName = 'UnpaidAmt'
+      currency = True
+    end
+    object PayrollMasterNumUnpaidDays: TFloatField
+      FieldName = 'NumUnpaidDays'
+      currency = True
+    end
+    object PayrollMasterUnpaidRate: TFloatField
+      FieldName = 'UnpaidRate'
+      currency = True
+    end
+    object PayrollMasterpremiumpay: TFloatField
+      FieldName = 'premiumpay'
+      currency = True
+    end
+    object PayrollMasterRegOtPay: TFloatField
+      FieldName = 'RegOtPay'
+      currency = True
+    end
+    object PayrollMasterSpcOTPay: TFloatField
+      FieldName = 'SpcOTPay'
+      currency = True
+    end
+    object PayrollMasterRestOtPay: TFloatField
+      FieldName = 'RestOtPay'
+      currency = True
+    end
+    object PayrollMasterRestOtExPay: TFloatField
+      FieldName = 'RestOtExPay'
+      currency = True
+    end
+    object PayrollMasterLegOTPay: TFloatField
+      FieldName = 'LegOTPay'
+      currency = True
+    end
+    object PayrollMasterLegOtExPay: TFloatField
+      FieldName = 'LegOtExPay'
+      currency = True
+    end
+    object PayrollMasterLegRestOtPay: TFloatField
+      FieldName = 'LegRestOtPay'
+      currency = True
+    end
+    object PayrollMasterSpcOtExPay: TFloatField
+      FieldName = 'SpcOtExPay'
+      currency = True
+    end
+    object PayrollMasternsd: TFloatField
+      FieldName = 'nsd'
+      currency = True
+    end
+    object PayrollMasterundertime: TFloatField
+      FieldName = 'undertime'
+      currency = True
+    end
+    object PayrollMasterabsences: TFloatField
+      FieldName = 'absences'
+      currency = True
+    end
+    object PayrollMasterriceallowance: TFloatField
+      FieldName = 'riceallowance'
+      currency = True
+    end
+    object PayrollMasterhazard: TFloatField
+      FieldName = 'hazard'
+      currency = True
+    end
+    object PayrollMasterlighting: TFloatField
+      FieldName = 'lighting'
+      currency = True
+    end
+    object PayrollMasterMonth13: TFloatField
+      FieldName = 'Month13'
+      currency = True
+    end
+    object PayrollMasterBonus: TFloatField
+      FieldName = 'Bonus'
+      currency = True
+    end
+    object PayrollMasterOtherPay: TFloatField
+      FieldName = 'OtherPay'
+      currency = True
+    end
+    object PayrollMasterPAGIBIGCont: TFloatField
+      FieldName = 'PAGIBIGCont'
+      currency = True
+    end
+    object PayrollMasterSSSCont: TFloatField
+      FieldName = 'SSSCont'
+      currency = True
+    end
+    object PayrollMasterPhilHealth: TFloatField
+      FieldName = 'PhilHealth'
+      currency = True
+    end
+    object PayrollMasterWTax: TFloatField
+      FieldName = 'WTax'
+      currency = True
+    end
+    object PayrollMasterOtherDeduction: TFloatField
+      FieldName = 'OtherDeduction'
+      currency = True
+    end
+    object PayrollMasternetpay: TFloatField
+      FieldName = 'netpay'
+      currency = True
+    end
+    object PayrollMasterpaycode: TLargeintField
+      FieldName = 'paycode'
+    end
+    object PayrollMasterwtaxstatus: TStringField
+      FieldName = 'wtaxstatus'
+      Size = 10
+    end
+    object PayrollMastertaxable: TFloatField
+      FieldName = 'taxable'
+      currency = True
+    end
+    object PayrollMasterRegOtHrs: TFloatField
+      FieldName = 'RegOtHrs'
+    end
+    object PayrollMasterSpcOTHrs: TFloatField
+      FieldName = 'SpcOTHrs'
+    end
+    object PayrollMasterRestOtHrs: TFloatField
+      FieldName = 'RestOtHrs'
+    end
+    object PayrollMasterRestOtExHrs: TFloatField
+      FieldName = 'RestOtExHrs'
+    end
+    object PayrollMasterLegOTHrs: TFloatField
+      FieldName = 'LegOTHrs'
+    end
+    object PayrollMasterLegOtExHrs: TFloatField
+      FieldName = 'LegOtExHrs'
+    end
+    object PayrollMasterLegRestOtExPay: TFloatField
+      FieldName = 'LegRestOtExPay'
+    end
+    object PayrollMasterLegRestOtHrs: TFloatField
+      FieldName = 'LegRestOtHrs'
+    end
+    object PayrollMasterLegRestOtExHrs: TFloatField
+      FieldName = 'LegRestOtExHrs'
+    end
+    object PayrollMasterSpcOtExHrs: TFloatField
+      FieldName = 'SpcOtExHrs'
+    end
+    object PayrollMasterNSDHrs: TFloatField
+      FieldName = 'NSDHrs'
+    end
+    object PayrollMasterUndertimeHrs: TFloatField
+      FieldName = 'UndertimeHrs'
+    end
+    object PayrollMasterAbsencesDays: TFloatField
+      FieldName = 'AbsencesDays'
+    end
+    object PayrollMasterPremiumDays: TFloatField
+      FieldName = 'PremiumDays'
+    end
+    object PayrollMasterTardiHrs: TFloatField
+      FieldName = 'TardiHrs'
+    end
+    object PayrollMasterDailyRate: TFloatField
+      FieldName = 'DailyRate'
+    end
+    object PayrollMasteremployeestatus: TStringField
+      FieldName = 'employeestatus'
+      Size = 1
+    end
+    object PayrollMasterDayPresent: TFloatField
+      FieldName = 'DayPresent'
+    end
+    object PayrollMasterTardi: TFloatField
+      FieldName = 'Tardi'
+    end
+    object PayrollMasterperMonetize: TFloatField
+      FieldName = 'perMonetize'
+    end
+    object PayrollMasterperLeaveCredits: TFloatField
+      FieldName = 'perLeaveCredits'
+    end
+    object PayrollMasterRegOTRate: TFloatField
+      FieldName = 'RegOTRate'
+    end
+    object PayrollMasterSpcOTRate: TFloatField
+      FieldName = 'SpcOTRate'
+    end
+    object PayrollMasterSpcExOTRate: TFloatField
+      FieldName = 'SpcExOTRate'
+    end
+    object PayrollMasterLegOTRate: TFloatField
+      FieldName = 'LegOTRate'
+    end
+    object PayrollMasterLegExOTRate: TFloatField
+      FieldName = 'LegExOTRate'
+    end
+    object PayrollMasterLegRestOTRate: TFloatField
+      FieldName = 'LegRestOTRate'
+    end
+    object PayrollMasterLegRestExOTRate: TFloatField
+      FieldName = 'LegRestExOTRate'
+    end
+    object PayrollMasterisLock: TWordField
+      FieldName = 'isLock'
+    end
+    object PayrollMasterarea: TStringField
+      FieldName = 'area'
+      Size = 3
+    end
+    object PayrollMasterDF: TDateTimeField
+      FieldName = 'DF'
+    end
+    object PayrollMasterDT: TDateTimeField
+      FieldName = 'DT'
+    end
+    object PayrollMasterprorate: TFloatField
+      FieldName = 'prorate'
+    end
+    object PayrollMasterprerate: TFloatField
+      FieldName = 'prerate'
+    end
+    object PayrollMasterSpcRestOTRate: TFloatField
+      FieldName = 'SpcRestOTRate'
+    end
+    object PayrollMasterSpcRestHrs: TFloatField
+      FieldName = 'SpcRestHrs'
+    end
+    object PayrollMasterSpcRestpay: TFloatField
+      FieldName = 'SpcRestpay'
+    end
+  end
+  object dsPayrollMaster: TDataSource
+    DataSet = PayrollMaster
+    Left = 662
+    Top = 99
+  end
+  object Employee: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from employee '
+      'where (lastname like :name or'
+      '       firstname like :name) and'
+      '      (deptcode like :DC or deptcode is null)'
+      'order by deptcode, lastname')
+    Left = 160
+    Top = 24
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'name'
+        Value = 'BAO'
+      end
+      item
+        DataType = ftString
+        Name = 'name'
+        Value = 'BAO'
+      end
+      item
+        DataType = ftString
+        Name = 'DC'
+        Value = '%'
+      end>
+    object Employeeidemployee: TLargeintField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'idemployee'
+      Origin = 'employee.idemployee'
+    end
+    object Employeeempnumber: TStringField
+      FieldName = 'empnumber'
+      Origin = 'employee.empnumber'
+      Size = 15
+    end
+    object Employeesssnumber: TStringField
+      FieldName = 'sssnumber'
+      Origin = 'employee.sssnumber'
+      Size = 15
+    end
+    object Employeetin: TStringField
+      FieldName = 'tin'
+      Origin = 'employee.tin'
+      Size = 15
+    end
+    object Employeedeptcode: TStringField
+      FieldName = 'deptcode'
+      Origin = 'employee.deptcode'
+      Size = 15
+    end
+    object Employeefirstname: TStringField
+      FieldName = 'firstname'
+      Origin = 'employee.firstname'
+      Size = 30
+    end
+    object Employeemiddlename: TStringField
+      FieldName = 'middlename'
+      Origin = 'employee.middlename'
+      Size = 30
+    end
+    object Employeelastname: TStringField
+      FieldName = 'lastname'
+      Origin = 'employee.lastname'
+      Size = 30
+    end
+    object Employeeaddress: TStringField
+      FieldName = 'address'
+      Origin = 'employee.address'
+      Size = 50
+    end
+    object Employeetitle: TStringField
+      FieldName = 'title'
+      Origin = 'employee.title'
+      Size = 30
+    end
+    object Employeerank: TStringField
+      FieldName = 'rank'
+      Origin = 'employee.rank'
+      Size = 15
+    end
+    object Employeebasicpay: TFloatField
+      FieldName = 'basicpay'
+      Origin = 'employee.basicpay'
+      currency = True
+    end
+    object Employeewtaxstatus: TStringField
+      FieldName = 'wtaxstatus'
+      Origin = 'employee.wtaxstatus'
+      Size = 10
+    end
+    object Employeeemppicture: TBlobField
+      FieldName = 'emppicture'
+      Origin = 'employee.emppicture'
+    end
+    object Employeebionumber: TStringField
+      FieldName = 'bionumber'
+      Size = 15
+    end
+    object Employeedateemployed: TDateTimeField
+      FieldName = 'dateemployed'
+    end
+    object EmployeePagibigNo: TStringField
+      FieldName = 'PagibigNo'
+      Size = 15
+    end
+    object Employeemonthlyleave: TFloatField
+      FieldName = 'monthlyleave'
+    end
+    object Employeedepartmentname: TStringField
+      FieldName = 'departmentname'
+      Size = 40
+    end
+    object EmployeeDailyRate: TFloatField
+      FieldName = 'DailyRate'
+    end
+    object Employeeemployeestatus: TStringField
+      FieldName = 'employeestatus'
+      Size = 1
+    end
+    object EmployeeFBSickLeave: TFloatField
+      FieldName = 'FBSickLeave'
+    end
+    object EmployeeFBVacationLeave: TFloatField
+      FieldName = 'FBVacationLeave'
+    end
+    object Employeedependents: TMemoField
+      FieldName = 'dependents'
+      BlobType = ftMemo
+    end
+    object EmployeeBDay: TDateField
+      FieldName = 'BDay'
+    end
+    object EmployeePhilhealthId: TStringField
+      FieldName = 'PhilhealthId'
+      Size = 15
+    end
+    object Employeemiddleinitial: TStringField
+      FieldName = 'middleinitial'
+      Size = 5
+    end
+    object EmployeeisFlexiTime: TBooleanField
+      FieldName = 'isFlexiTime'
+    end
+  end
+  object dsEmployee: TDataSource
+    DataSet = Employee
+    Left = 158
+    Top = 99
+  end
+  object Emp201: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from emp201')
+    MasterSource = dsEmployee
+    MasterFields = 'idemployee'
+    DetailFields = 'idemployee'
+    Left = 160
+    Top = 176
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idemployee'
+      end>
+    object Emp201idemp201: TLargeintField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'idemp201'
+      Origin = 'emp201.idemp201'
+    end
+    object Emp201empnumber: TStringField
+      FieldName = 'empnumber'
+      Origin = 'emp201.empnumber'
+      Size = 15
+    end
+    object Emp201date201: TDateField
+      FieldName = 'date201'
+      Origin = 'emp201.date201'
+    end
+    object Emp201reference: TStringField
+      FieldName = 'reference'
+      Origin = 'emp201.reference'
+      Size = 15
+    end
+    object Emp201title: TStringField
+      FieldName = 'title'
+      Origin = 'emp201.title'
+      Size = 50
+    end
+    object Emp201docpicture: TBlobField
+      FieldName = 'docpicture'
+      Origin = 'emp201.docpicture'
+    end
+    object Emp201idemployee: TFloatField
+      FieldName = 'idemployee'
+      Origin = 'emp201.idemployee'
+    end
+  end
+  object dsEmp201: TDataSource
+    DataSet = Emp201
+    Left = 159
+    Top = 250
+  end
+  object PMDeduction: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO pmdeduction'
+      
+        '  (idemployee, Paymonth, empnumber, name, fixdeductionindex, loa' +
+        'nschedule, description, amount, employeecontribution, employerco' +
+        'ntribution, employeecompensation, paycode, paydesc,actualremitta' +
+        'nce)'
+      'VALUES'
+      
+        '  (:idemployee, :Paymonth, :empnumber, :name, :fixdeductionindex' +
+        ', :loanschedule, :description, :amount, :employeecontribution, :' +
+        'employercontribution, :employeecompensation, :paycode, :paydesc,' +
+        ' :amount)')
+    SQLDelete.Strings = (
+      'INSERT INTO pmdeductiondeleted'
+      
+        '  (idemployee, Paymonth, empnumber, name, fixdeductionindex, loa' +
+        'nschedule, description, amount, employeecontribution, employerco' +
+        'ntribution, employeecompensation, paycode,paydesc)'
+      'select '
+      
+        '  idemployee, Paymonth, empnumber, name, fixdeductionindex, loan' +
+        'schedule, description, amount, employeecontribution, employercon' +
+        'tribution, employeecompensation, paycode,paydesc'
+      'from pmdeduction'
+      'where idpmdeduction = :Old_idpmdeduction;'
+      'DELETE FROM pmdeduction'
+      'WHERE'
+      '  idpmdeduction = :Old_idpmdeduction;')
+    SQLUpdate.Strings = (
+      'UPDATE pmdeduction'
+      'SET'
+      
+        '  idemployee = :idemployee, Paymonth = :Paymonth, empnumber = :e' +
+        'mpnumber, name = :name, fixdeductionindex = :fixdeductionindex, ' +
+        'loanschedule = :loanschedule, description = :description, amount' +
+        ' = :amount, employeecontribution = :employeecontribution, employ' +
+        'ercontribution = :employercontribution, employeecompensation = :' +
+        'employeecompensation, paycode = :paycode, paydesc = :paydesc, ac' +
+        'tualremittance = :amount'
+      'WHERE'
+      '  idpmdeduction = :Old_idpmdeduction')
+    SQLRefresh.Strings = (
+      
+        'SELECT idemployee, Paymonth, empnumber, name, fixdeductionindex,' +
+        ' loanschedule, description, amount, employeecontribution, employ' +
+        'ercontribution, employeecompensation, paycode, paydesc FROM pmde' +
+        'duction'
+      'WHERE'
+      '  idpmdeduction = :idpmdeduction')
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from pmdeduction')
+    MasterSource = dsPayrollMaster
+    MasterFields = 'paymonth;idemployee;paycode;description'
+    DetailFields = 'Paymonth;idemployee;paycode;paydesc'
+    Left = 664
+    Top = 176
+    ParamData = <
+      item
+        DataType = ftDate
+        Name = 'paymonth'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftUnknown
+        Name = 'idemployee'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'paycode'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'description'
+      end>
+    object PMDeductionidpmdeduction: TLargeintField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'idpmdeduction'
+      Origin = 'pmdeduction.idpmdeduction'
+    end
+    object PMDeductionPaymonth: TDateField
+      FieldName = 'Paymonth'
+      Origin = 'pmdeduction.Paymonth'
+    end
+    object PMDeductionempnumber: TStringField
+      FieldName = 'empnumber'
+      Origin = 'pmdeduction.empnumber'
+      Size = 15
+    end
+    object PMDeductionname: TStringField
+      FieldName = 'name'
+      Origin = 'pmdeduction.name'
+      Size = 50
+    end
+    object PMDeductionfixdeductionindex: TLargeintField
+      FieldName = 'fixdeductionindex'
+      Origin = 'pmdeduction.fixdeductionindex'
+    end
+    object PMDeductionloanschedule: TLargeintField
+      FieldName = 'loanschedule'
+      Origin = 'pmdeduction.loanschedule'
+    end
+    object PMDeductiondescription: TStringField
+      FieldName = 'description'
+      Origin = 'pmdeduction.description'
+      Size = 50
+    end
+    object PMDeductionamount: TFloatField
+      FieldName = 'amount'
+      Origin = 'pmdeduction.amount'
+      currency = True
+    end
+    object PMDeductionemployeecontribution: TFloatField
+      FieldName = 'employeecontribution'
+      Origin = 'pmdeduction.employeecontribution'
+      currency = True
+    end
+    object PMDeductionemployercontribution: TFloatField
+      FieldName = 'employercontribution'
+      Origin = 'pmdeduction.employercontribution'
+      currency = True
+    end
+    object PMDeductionemployeecompensation: TFloatField
+      FieldName = 'employeecompensation'
+      Origin = 'pmdeduction.employeecompensation'
+      currency = True
+    end
+    object PMDeductionidemployee: TFloatField
+      FieldName = 'idemployee'
+      Origin = 'pmdeduction.idemployee'
+    end
+    object PMDeductionpaycode: TStringField
+      FieldName = 'paycode'
+      Origin = 'pmdeduction.paycode'
+      Size = 1
+    end
+    object PMDeductionpaydesc: TStringField
+      FieldName = 'paydesc'
+      Size = 100
+    end
+    object PMDeductionactualremittance: TFloatField
+      FieldName = 'actualremittance'
+    end
+  end
+  object dsPMDeduction: TDataSource
+    DataSet = PMDeduction
+    Left = 664
+    Top = 248
+  end
+  object EmpLeave: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from empleavecredits')
+    OnCalcFields = EmpLeaveCalcFields
+    MasterSource = dsEmployee
+    MasterFields = 'idemployee'
+    DetailFields = 'idemployee'
+    Left = 288
+    Top = 176
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idemployee'
+      end>
+    object EmpLeaveidempleavecredits: TLargeintField
+      FieldName = 'idempleavecredits'
+    end
+    object EmpLeaveidemployee: TFloatField
+      FieldName = 'idemployee'
+    end
+    object EmpLeaveDatePosted: TDateField
+      FieldName = 'DatePosted'
+    end
+    object EmpLeaveRemarks: TStringField
+      FieldName = 'Remarks'
+      Size = 50
+    end
+    object EmpLeaveempnumber: TStringField
+      FieldName = 'empnumber'
+      Size = 15
+    end
+    object EmpLeaveLeaveIn: TFloatField
+      FieldName = 'LeaveIn'
+    end
+    object EmpLeaveLeaveOut: TFloatField
+      FieldName = 'LeaveOut'
+    end
+    object EmpLeaveLeaveDesc: TStringField
+      FieldName = 'LeaveDesc'
+      Size = 1
+    end
+    object EmpLeavedescription: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'description'
+      Calculated = True
+    end
+    object EmpLeaveEntryType: TWordField
+      FieldName = 'EntryType'
+    end
+    object EmpLeaveOT: TWordField
+      FieldName = 'OT'
+    end
+  end
+  object dsEmpLeave: TDataSource
+    DataSet = EmpLeave
+    Left = 287
+    Top = 250
+  end
+  object Dept: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from department '
+      'where departmentname like :departmentname')
+    Left = 800
+    Top = 24
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'departmentname'
+      end>
+    object Deptiddepartment: TLargeintField
+      FieldName = 'iddepartment'
+    end
+    object Deptdepartmentcode: TStringField
+      FieldName = 'departmentcode'
+      Size = 10
+    end
+    object Deptdepartmentname: TStringField
+      FieldName = 'departmentname'
+      Size = 50
+    end
+  end
+  object dsDepartment: TDataSource
+    DataSet = PayrollMaster
+    Left = 798
+    Top = 99
+  end
+  object Accountchart: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO accountchart'
+      
+        '  (idEmployee, idChart, empNumber, Description, AccountCode,payc' +
+        'ode)'
+      'VALUES'
+      
+        '  (:idEmployee, :idChart, :empNumber, :Description, :AccountCode' +
+        ',:paycode)')
+    SQLDelete.Strings = (
+      'DELETE FROM accountchart'
+      'WHERE'
+      '  idAccountChart = :Old_idAccountChart')
+    SQLUpdate.Strings = (
+      'UPDATE accountchart'
+      'SET'
+      
+        '  idEmployee = :idEmployee, idChart = :idChart, empNumber = :emp' +
+        'Number, Description = :Description, AccountCode = :AccountCode, ' +
+        'Paycode = :paycode'
+      'WHERE'
+      '  idAccountChart = :Old_idAccountChart')
+    SQLRefresh.Strings = (
+      
+        'SELECT idEmployee, idChart, empNumber, Description, AccountCode,' +
+        'Paycode FROM accountchart'
+      'WHERE'
+      '  idAccountChart = :idAccountChart')
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select '
+      '  ac.idaccountchart,'
+      '  ac.idchart, '
+      '  ac.idemployee,'
+      '  ac.description,'
+      '  ac.empnumber,'
+      '  ac.accountcode,'
+      '  c.accountname,'
+      '  ac.paycode'
+      'from '
+      '  accountchart ac'
+      'inner join zanecoacctg.chart c on c.idchart = ac.idchart')
+    Left = 160
+    Top = 336
+    object Accountchartidaccountchart: TIntegerField
+      FieldName = 'idaccountchart'
+    end
+    object Accountchartidchart: TLargeintField
+      FieldName = 'idchart'
+    end
+    object Accountchartidemployee: TLargeintField
+      FieldName = 'idemployee'
+    end
+    object Accountchartdescription: TStringField
+      FieldName = 'description'
+      Size = 50
+    end
+    object Accountchartempnumber: TStringField
+      FieldName = 'empnumber'
+    end
+    object Accountchartaccountcode: TStringField
+      FieldName = 'accountcode'
+    end
+    object Accountchartaccountname: TStringField
+      FieldName = 'accountname'
+      Size = 70
+    end
+    object Accountchartpaycode: TStringField
+      FieldName = 'paycode'
+      Size = 1
+    end
+  end
+  object dsAccountChart: TDataSource
+    DataSet = Accountchart
+    Left = 159
+    Top = 386
+  end
+  object DepartmentEntry: TMyTable
+    TableName = 'department'
+    Connection = MyConnection1
+    Left = 288
+    Top = 336
+    object DepartmentEntryiddepartment: TLargeintField
+      FieldName = 'iddepartment'
+    end
+    object DepartmentEntrydepartmentcode: TStringField
+      FieldName = 'departmentcode'
+      Size = 10
+    end
+    object DepartmentEntrydepartmentname: TStringField
+      FieldName = 'departmentname'
+      Size = 50
+    end
+    object DepartmentEntryselecteddepartment: TBooleanField
+      FieldName = 'selecteddepartment'
+    end
+    object DepartmentEntryArea: TStringField
+      FieldName = 'Area'
+      Size = 3
+    end
+  end
+  object DescriptionListing: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select * from Descriptionlisting')
+    Left = 416
+    Top = 336
+    object DescriptionListingidDescriptionListing: TLargeintField
+      FieldName = 'idDescriptionListing'
+    end
+    object DescriptionListingDescription: TStringField
+      FieldName = 'Description'
+      Size = 50
+    end
+    object DescriptionListingAccountCode: TStringField
+      FieldName = 'AccountCode'
+    end
+  end
+  object Rank: TMyTable
+    TableName = 'rankpos'
+    Connection = MyConnection1
+    Left = 536
+    Top = 336
+    object RankidRankPos: TLargeintField
+      FieldName = 'idRankPos'
+    end
+    object RankRank: TLargeintField
+      FieldName = 'Rank'
+    end
+    object RankDescription: TStringField
+      FieldName = 'Description'
+      Size = 30
+    end
+    object RankBasicPay: TFloatField
+      FieldName = 'BasicPay'
+    end
+  end
+  object NR3001dk: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'select e.lastname,   '
+      '       e.firstname,'
+      '       e.middlename,'
+      '       e.sssnumber,'
+      
+        '       ifnull(p.employeecontribution+p.employercontribution,0) S' +
+        'SSContribution,'
+      '       ifnull(p.employeecompensation,0) Compensation'
+      'from pmdeduction p'
+      '  inner join employee e on (e.idemployee = p.idemployee)'
+      'where p.description = '#39'SSS Contribution'#39' and'
+      '      p.paymonth = :paymonth and'
+      '      p.paycode = :paycode')
+    Left = 936
+    Top = 32
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'paymonth'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'paycode'
+      end>
+    object NR3001dklastname: TStringField
+      FieldName = 'lastname'
+      Size = 30
+    end
+    object NR3001dkfirstname: TStringField
+      FieldName = 'firstname'
+      Size = 30
+    end
+    object NR3001dkmiddlename: TStringField
+      FieldName = 'middlename'
+      Size = 30
+    end
+    object NR3001dksssnumber: TStringField
+      FieldName = 'sssnumber'
+      Size = 15
+    end
+    object NR3001dkSSSContribution: TFloatField
+      FieldName = 'SSSContribution'
+    end
+    object NR3001dkCompensation: TFloatField
+      FieldName = 'Compensation'
+    end
+  end
+  object PayrollYear: TMyQuery
+    Connection = MyConnection1
+    SQL.Strings = (
+      'SELECT year(paymonth) pmonth FROM `payrollmaster`'
+      'group by year(paymonth);')
+    Left = 1024
+    Top = 32
+  end
+end

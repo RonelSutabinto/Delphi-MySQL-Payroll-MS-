@@ -1,0 +1,534 @@
+unit YearlyAlphalist;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, NxCollection, Grids, DBGrids, CRGrid, ComCtrls, NxEdit, DB,
+  DBAccess, MyAccess, MemDS, ExtCtrls, Menus;
+
+type
+  TAnnualAlphalist = class(TForm)
+    AlphaNontaxable: TMyQuery;
+    dsAlphaNonTax: TMyDataSource;
+    NxPanel1: TNxPanel;
+    SearchPayroll: TMyQuery;
+    dsSearchPayroll: TMyDataSource;
+    CRDBGrid1: TCRDBGrid;
+    insertAlphanontaxable: TMyQuery;
+    Panel1: TPanel;
+    CRDBGrid2: TCRDBGrid;
+    nhpIncentives: TNxHeaderPanel;
+    NxLabel1: TNxLabel;
+    NxEdit1: TNxEdit;
+    NxButton1: TNxButton;
+    NxLabel5: TNxLabel;
+    DateTimePicker1: TDateTimePicker;
+    AlphaAwardsClothing: TMyQuery;
+    dsAlphaAwardsClothing: TMyDataSource;
+    CRDBGrid3: TCRDBGrid;
+    InsertAlphaAwards: TMyQuery;
+    StringField5: TStringField;
+    AlphaAllowance: TMyQuery;
+    dsAlphaallowance: TMyDataSource;
+    CRDBGrid4: TCRDBGrid;
+    InsertAlphaAllowance: TMyQuery;
+    StringField6: TStringField;
+    NxLabel4: TNxLabel;
+    NxLabel7: TNxLabel;
+    NxEdit2: TNxEdit;
+    NxLabel2: TNxLabel;
+    NxButton2: TNxButton;
+    NxLabel8: TNxLabel;
+    NxLabel3: TNxLabel;
+    NxButton3: TNxButton;
+    NxEdit3: TNxEdit;
+    NxLabel9: TNxLabel;
+    NxLabel10: TNxLabel;
+    NxEdit4: TNxEdit;
+    NxButton4: TNxButton;
+    CRDBGrid5: TCRDBGrid;
+    Alpha13thCA: TMyQuery;
+    DSalpha13thca: TMyDataSource;
+    insert13thCA: TMyQuery;
+    StringField8: TStringField;
+    MainMenu1: TMainMenu;
+    PreviewAnnualAlphalist1: TMenuItem;
+    GrossPay1: TMenuItem;
+    Rice2: TMenuItem;
+    LightingandMedical2: TMenuItem;
+    Cola2: TMenuItem;
+    OtherPayroll1: TMenuItem;
+    ax1: TMenuItem;
+    Overtime1: TMenuItem;
+    N13thMonthPay1: TMenuItem;
+    Benefits1: TMenuItem;
+    Contributions1: TMenuItem;
+    RiceLMACOLASummary1: TMenuItem;
+    SSS1: TMenuItem;
+    PAGIBIG1: TMenuItem;
+    PHILHEALTH1: TMenuItem;
+    SearchPayrollDescription: TStringField;
+    AlphaNontaxableidAlphalistBenefits: TLongWordField;
+    AlphaNontaxableidemployee: TLongWordField;
+    AlphaNontaxablelastname: TStringField;
+    AlphaNontaxablefirstname: TStringField;
+    AlphaNontaxableamount: TFloatField;
+    AlphaNontaxableDescription: TStringField;
+    AlphaNontaxabledaypresent: TLongWordField;
+    AlphaNontaxablebasicpay: TFloatField;
+    AlphaNontaxablepaymonth: TDateField;
+    insertAlphanontaxableDescription: TStringField;
+    AlphaAwardsClothingidAlphalistCompensation: TLongWordField;
+    AlphaAwardsClothingidemployee: TLongWordField;
+    AlphaAwardsClothinglastname: TStringField;
+    AlphaAwardsClothingfirstname: TStringField;
+    AlphaAwardsClothingamount: TFloatField;
+    AlphaAwardsClothingDescription: TStringField;
+    AlphaAwardsClothingdaypresent: TLongWordField;
+    AlphaAwardsClothingbasicpay: TFloatField;
+    AlphaAwardsClothingpaymonth: TDateField;
+    AlphaAllowanceDescription: TStringField;
+    Alpha13thCADescription: TStringField;
+    procedure NxEdit1Change(Sender: TObject);
+    procedure NxEdit1Enter(Sender: TObject);
+    procedure CRDBGrid1DblClick(Sender: TObject);
+    procedure NxButton1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure NxEdit2Change(Sender: TObject);
+    procedure NxButton2Click(Sender: TObject);
+    procedure NxEdit2Enter(Sender: TObject);
+    procedure NxEdit3Change(Sender: TObject);
+    procedure NxEdit3Enter(Sender: TObject);
+    procedure NxButton3Click(Sender: TObject);
+    procedure NxEdit4Change(Sender: TObject);
+    procedure NxEdit4Enter(Sender: TObject);
+    procedure NxButton4Click(Sender: TObject);
+    procedure DateTimePicker1Change(Sender: TObject);
+    procedure PreviewAnnualAlphalist1Click(Sender: TObject);
+    procedure GrossPay1Click(Sender: TObject);
+    procedure LightingandMedical2Click(Sender: TObject);
+    procedure Cola2Click(Sender: TObject);
+    procedure Rice2Click(Sender: TObject);
+    procedure OtherPayroll1Click(Sender: TObject);
+    procedure ax1Click(Sender: TObject);
+    procedure Overtime1Click(Sender: TObject);
+    procedure N13thMonthPay1Click(Sender: TObject);
+    procedure RiceLMACOLASummary1Click(Sender: TObject);
+    procedure SSS1Click(Sender: TObject);
+    procedure PAGIBIG1Click(Sender: TObject);
+    procedure PHILHEALTH1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+
+    gEditbox : tnxedit;
+    procedure showgrid(pEditbox : Tnxedit;pPanel : tnxheaderpanel;pgrid : tcrdbgrid);
+  end;
+
+var
+  AnnualAlphalist: TAnnualAlphalist;
+
+implementation
+
+uses DatasetModl, Data, FlexMenu, Reportform, dateutils;
+
+{$R *.dfm}
+
+procedure TAnnualAlphalist.ax1Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+
+   annualtax.Close;
+   annualtax.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualtax.Open;
+
+   qrtax.PreviewWidth := screen.Width;
+   qrtax.PreviewHeight := screen.Height;
+   qrtax.Previewinitialstate := wsmaximized;
+   qrlabel110.Caption := 'Other Payroll ' + FormatDateTime('YYYY',datetimepicker1.date);
+
+   qrtax.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.Cola2Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   annualCOLA.close;
+   AnnualCOLA.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualCOLA.Open;
+
+   qrAnnualCola.PreviewWidth := screen.Width;
+   qrAnnualCola.PreviewHeight := screen.Height;
+   qrAnnualCola.Previewinitialstate := wsmaximized;
+   qrlabel30.Caption := 'Cost of Living Allowance ' + FormatDateTime('YYYY',datetimepicker1.date);
+
+   qrannualcola.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.CRDBGrid1DblClick(Sender: TObject);
+begin
+ geditbox.Text := SearchPayrollDescription.text;
+end;
+
+procedure TAnnualAlphalist.DateTimePicker1Change(Sender: TObject);
+begin
+ annualalphalist.FormShow(sender);
+end;
+
+procedure TAnnualAlphalist.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   Action := caFree;
+   Annualalphalist := Nil;
+end;
+
+procedure TAnnualAlphalist.FormShow(Sender: TObject);
+begin
+  alphanontaxable.Close;
+  alphanontaxable.ParamByName('df').AsDate := datetimepicker1.Date;
+  alphanontaxable.Open;
+
+  alphaawardsclothing.close;
+  alphaawardsclothing.ParamByName('df').AsDate := datetimepicker1.Date;
+  alphaawardsclothing.Open;
+
+  alphaallowance.Close;
+  alphaallowance.ParamByName('df').AsDate := datetimepicker1.Date;
+  alphaallowance.Open;
+
+  Alpha13thCA.Close;
+  alpha13thca.ParamByName('df').AsDate := datetimepicker1.Date;
+  alpha13thCA.Open;
+
+  datetimepicker1.Date := endoftheyear(datetimepicker1.Date);
+
+end;
+
+procedure TAnnualAlphalist.GrossPay1Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   Annualgrosspay.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualgrosspay.Open;
+
+   qrGrosspay.PreviewWidth := screen.Width;
+   qrgrosspay.PreviewHeight := screen.Height;
+   qrgrosspay.Previewinitialstate := wsmaximized;
+   qrlabel3.Caption := 'Annual Grosspay ' + FormatDateTime('YYYY',datetimepicker1.date);
+
+   qrgrosspay.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.LightingandMedical2Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   annualLMA.close;
+   AnnualLMA.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualLMA.Open;
+
+   qrLMA.PreviewWidth := screen.Width;
+   qrLMA.PreviewHeight := screen.Height;
+   qrLMA.Previewinitialstate := wsmaximized;
+   qrlabel30.Caption := 'Annual Lighting and Medical ' + FormatDateTime('YYYY',datetimepicker1.date);
+
+   qrLMA.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.N13thMonthPay1Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   month13.ParamByName('df').AsDate := datetimepicker1.Date;
+   month13.Open;
+
+   qrmonth13.PreviewWidth := screen.Width;
+   qrmonth13.PreviewHeight := screen.Height;
+   qrmonth13.Previewinitialstate := wsmaximized;
+   qrmonth13.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.NxButton1Click(Sender: TObject);
+begin
+ AlphaNontaxable.Close;
+
+ insertAlphanontaxable.ParamByName('df').AsDate := datetimepicker1.Date;
+ insertAlphanontaxable.ParamByName('desc').Text := nxedit1.Text;
+ insertalphanontaxable.Execute;
+
+ alphanontaxable.Open;
+
+ nxedit1.Clear;
+
+
+end;
+
+procedure TAnnualAlphalist.NxButton2Click(Sender: TObject);
+begin
+ AlphaAwardsClothing.Close;
+
+ InsertAlphaAwards.ParamByName('df').AsDate := datetimepicker1.Date;
+ insertAlphaAwards.ParamByName('desc').Text := nxedit2.Text;
+ insertAlphaAwards.Execute;
+
+ alphaawardsclothing.Open;
+
+  nxedit2.Clear;
+end;
+
+procedure TAnnualAlphalist.NxButton3Click(Sender: TObject);
+begin
+ Alphaallowance.Close;
+
+ insertalphaallowance.ParamByName('df').AsDate := datetimepicker1.Date;
+ insertalphaallowance.ParamByName('desc').Text := nxedit3.Text;
+ insertalphaallowance.Execute;
+
+ Alphaallowance.Open;
+
+  nxedit3.Clear;
+end;
+
+procedure TAnnualAlphalist.NxButton4Click(Sender: TObject);
+begin
+ Alpha13thCA.Close;
+
+ insert13thCA.ParamByName('df').AsDate := datetimepicker1.Date;
+ insert13thCA.ParamByName('desc').Text := nxedit4.Text;
+ insert13thCA.Execute;
+
+ Alpha13thCA.Open;
+  nxedit4.Clear;
+end;
+
+procedure TAnnualAlphalist.NxEdit1Change(Sender: TObject);
+begin
+   searchpayroll.Close;
+   searchpayroll.ParamByName('desc').Text             := '%' + nxedit1.Text + '%';
+   searchpayroll.ParamByName('df').asdatetime         := DateTimePicker1.Date;
+   searchpayroll.Open;
+   showgrid(nxedit1,nhpincentives,crdbgrid1);
+end;
+
+procedure TAnnualAlphalist.NxEdit1Enter(Sender: TObject);
+begin
+ geditbox := nxedit1;
+end;
+
+procedure TAnnualAlphalist.NxEdit2Change(Sender: TObject);
+begin
+   searchpayroll.Close;
+   searchpayroll.ParamByName('desc').Text             := '%' + nxedit2.Text + '%';
+   searchpayroll.ParamByName('df').asdatetime         := DateTimePicker1.Date;
+   searchpayroll.Open;
+   showgrid(nxedit2,nhpincentives,crdbgrid1);
+end;
+
+procedure TAnnualAlphalist.NxEdit2Enter(Sender: TObject);
+begin
+ geditbox := nxedit2;
+end;
+
+procedure TAnnualAlphalist.NxEdit3Change(Sender: TObject);
+begin
+   searchpayroll.Close;
+   searchpayroll.ParamByName('desc').Text             := '%' + nxedit3.Text + '%';
+   searchpayroll.ParamByName('df').asdatetime         := DateTimePicker1.Date;
+
+   searchpayroll.Open;
+   showgrid(nxedit3,nhpincentives,crdbgrid1);
+end;
+
+procedure TAnnualAlphalist.NxEdit3Enter(Sender: TObject);
+begin
+ geditbox := nxedit3;
+end;
+
+procedure TAnnualAlphalist.NxEdit4Change(Sender: TObject);
+begin
+   searchpayroll.Close;
+   searchpayroll.ParamByName('desc').Text             := '%' + nxedit4.Text + '%';
+   searchpayroll.ParamByName('df').asdatetime         := DateTimePicker1.Date;
+   searchpayroll.Open;
+   showgrid(nxedit4,nhpincentives,crdbgrid1);
+end;
+
+procedure TAnnualAlphalist.NxEdit4Enter(Sender: TObject);
+begin
+ geditbox := nxedit4;
+end;
+
+procedure TAnnualAlphalist.OtherPayroll1Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   annualOtherpay.close;
+   AnnualOtherpay.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualOtherpay.Open;
+
+   qrOtherpay.PreviewWidth := screen.Width;
+   qrOtherpay.PreviewHeight := screen.Height;
+   qrOtherpay.Previewinitialstate := wsmaximized;
+   qrlabel91.Caption := 'Other Payroll ' + FormatDateTime('YYYY',datetimepicker1.date);
+
+   qrOtherpay.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.Overtime1Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   annualovertime.close;
+   annualovertime.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualovertime.Open;
+
+   qrovertime.PreviewWidth := screen.Width;
+   qrovertime.PreviewHeight := screen.Height;
+   qrovertime.Previewinitialstate := wsmaximized;
+   qrlabel116.Caption := 'Overtime ' + FormatDateTime('YYYY',datetimepicker1.date);
+
+   qrovertime.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.PAGIBIG1Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   AnnualSPPH.MacroByName('SSS').active := false;
+   AnnualSPPH.MacroByName('PAGIBIG').active := true;
+   AnnualSPPH.MacroByName('PHILHEALTH').active := false;
+
+   AnnualSPPH.Close;
+   AnnualSPPH.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualSPPH.Open;
+
+   qrSSS.PreviewWidth := screen.Width;
+   qrSSS.PreviewHeight := screen.Height;
+   qrSSS.Previewinitialstate := wsmaximized;
+   qrlabel158.Caption := 'PAGIBIG CONTRIBUTION' + formatdatetime('YYYY',datetimepicker1.Date);
+
+   qrSSS.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.PHILHEALTH1Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   AnnualSPPH.MacroByName('SSS').active := false;
+   AnnualSPPH.MacroByName('PAGIBIG').active := false;
+   AnnualSPPH.MacroByName('PHILHEALTH').active := true;
+
+   AnnualSPPH.Close;
+   AnnualSPPH.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualSPPH.Open;
+
+   qrSSS.PreviewWidth := screen.Width;
+   qrSSS.PreviewHeight := screen.Height;
+   qrSSS.Previewinitialstate := wsmaximized;
+   qrlabel158.Caption := 'PHILHEALTH' + formatdatetime('YYYY',datetimepicker1.Date);
+
+   qrSSS.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.PreviewAnnualAlphalist1Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   Annualalphalist.close;
+   AnnualAlphalist.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualAlphalist.Open;
+
+   qrAlphalist.PreviewWidth := screen.Width;
+   qrAlphalist.PreviewHeight := screen.Height;
+   qrAlphalist.Previewinitialstate := wsmaximized;
+   qrlabel5.Caption := 'Annual Alphalist ' + FormatDateTime('YYYY',datetimepicker1.date);
+
+   qrAlphalist.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.Rice2Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   annualRice.close;
+   AnnualRice.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualRice.Open;
+
+   qrRice.PreviewWidth := screen.Width;
+   qrRice.PreviewHeight := screen.Height;
+   qrRice.Previewinitialstate := wsmaximized;
+   qrlabel73.Caption := 'Rice Allowance ' + FormatDateTime('YYYY',datetimepicker1.date);
+
+   qrRice.Preview;
+  end;
+end;
+
+procedure TAnnualAlphalist.RiceLMACOLASummary1Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   RCLMATotal.Close;
+   RCLMATotal.ParamByName('df').AsDate := datetimepicker1.Date;
+   RCLMATotal.Open;
+
+   qrRclma.PreviewWidth := screen.Width;
+   qrRclma.PreviewHeight := screen.Height;
+   qrRclma.Previewinitialstate := wsmaximized;
+
+   qrRclma.Preview;
+  end;
+end;
+
+procedure tannualalphalist.showgrid(pEditbox : Tnxedit;pPanel : tnxheaderpanel;pgrid : tcrdbgrid);
+begin
+
+ if (peditbox.focused) and (length(peditbox.Text) > 3 ) then
+  begin
+   pgrid.Left := pPanel.Left + peditbox.Left;
+   pgrid.top  := pPanel.top + peditbox.top + 25;
+   pgrid.Visible := true;
+  end
+ else
+  begin
+   pgrid.Visible := false;
+ end;
+
+
+end;
+
+procedure TAnnualAlphalist.SSS1Click(Sender: TObject);
+begin
+ with Reports do
+  begin
+   AnnualSPPH.MacroByName('SSS').active := true;
+   AnnualSPPH.MacroByName('PAGIBIG').active := false;
+   AnnualSPPH.MacroByName('PHILHEALTH').active := false;
+
+   AnnualSPPH.Close;
+   AnnualSPPH.ParamByName('df').AsDate := datetimepicker1.Date;
+   annualSPPH.Open;
+
+   qrSSS.PreviewWidth := screen.Width;
+   qrSSS.PreviewHeight := screen.Height;
+   qrSSS.Previewinitialstate := wsmaximized;
+   qrlabel158.Caption := 'SSS CONTRIBUTION' + formatdatetime('YYYY',datetimepicker1.Date);
+
+   qrSSS.Preview;
+  end;
+end;
+
+end.

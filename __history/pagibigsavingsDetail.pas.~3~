@@ -1,0 +1,30 @@
+unit pagibigsavingsDetail;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, NxCollection, Vcl.Grids, Vcl.DBGrids,
+  CRGrid, AdvSmoothLabel, Vcl.ExtCtrls, AdvPanel;
+
+type
+  TpagibigsavingsDetailsFrm = class(TForm)
+    AdvPanel1: TAdvPanel;
+    AdvSmoothLabel1: TAdvSmoothLabel;
+    CRDBGrid1: TCRDBGrid;
+    AdvPanel2: TAdvPanel;
+    NxLinkLabel1: TNxLinkLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  pagibigsavingsDetailsFrm: TpagibigsavingsDetailsFrm;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011/11/17 14:04:24.546.pas,D:\Project Zaneco\Zaneco Latest\Flex payoll\YearlyAlphalist.pas=D:\Project Zaneco\Zaneco Latest\Flex payoll\Unit1.pas</Transaction>
+    <Transaction>2011/11/17 14:04:24.546.dfm,D:\Project Zaneco\Zaneco Latest\Flex payoll\YearlyAlphalist.dfm=D:\Project Zaneco\Zaneco Latest\Flex payoll\Unit1.dfm</Transaction>
+    <Transaction>2020/01/22 10:57:29.000.147,=D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-21\Unit1.pas</Transaction>
+    <Transaction>2020/01/22 11:03:39.000.713,D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-21\pagibigsavingsFrm.dfm=D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-21\Unit1.dfm</Transaction>
+    <Transaction>2020/01/22 11:03:39.000.713,D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-21\pagibigsavingsFrm.pas=D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-21\Unit1.pas</Transaction>
+    <Transaction>2020/01/22 13:21:59.000.376,=D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-21\Unit1.pas</Transaction>
+    <Transaction>2020/01/22 13:23:34.000.650,D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-21\searchemployeeFrm.pas=D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-21\Unit1.pas</Transaction>
+    <Transaction>2020/01/22 13:23:34.000.650,D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-21\searchemployeeFrm.dfm=D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-21\Unit1.dfm</Transaction>
+    <Transaction>2020/02/03 10:13:21.000.336,=D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-30\Unit1.pas</Transaction>
+    <Transaction>2020/02/03 10:15:09.000.095,D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-30\pagibigsavingsDetail.dfm=D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-30\Unit1.dfm</Transaction>
+    <Transaction>2020/02/03 10:15:09.000.095,D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-30\pagibigsavingsDetail.pas=D:\My Source Code\2020\Delphi\zaneco\source code\Flex payoll 2020-01-30\Unit1.pas</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="AlphaListForwardedBalance.pas"/>
+    <File Path="AlphaListForwardedBalance.dfm"/>
+    <File Path="budgetform.pas"/>
+    <File Path="budgetform.dfm"/>
+    <File Path="Data.pas"/>
+    <File Path="Data.dfm"/>
+    <File Path="DatasetModl.pas"/>
+    <File Path="DatasetModl.dfm"/>
+    <File Path="dept.pas"/>
+    <File Path="dept.dfm"/>
+    <File Path="EmpnoAccount.pas"/>
+    <File Path="EmpnoAccount.dfm"/>
+    <File Path="FlexiPackPayrollIntro.pas"/>
+    <File Path="FlexiPackPayrollIntro.dfm"/>
+    <File Path="FlexMenu.pas"/>
+    <File Path="FlexMenu.dfm"/>
+    <File Path="MODTOOLS.PAS"/>
+    <File Path="Reportform.pas"/>
+    <File Path="Reportform.dfm"/>
+    <File Path="STCSPayrollLib.pas"/>
+    <File Path="YearlyAlphalist.pas"/>
+    <File Path="YearlyAlphalist.dfm"/>
+    <File Path="pagibigsavingsFrm.pas"/>
+    <File Path="pagibigsavingsFrm.dfm"/>
+    <File Path="searchemployeeFrm.pas"/>
+    <File Path="searchemployeeFrm.dfm"/>
+    <File Path="pagibigsavingsDetail.pas"/>
+    <File Path="pagibigsavingsDetail.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

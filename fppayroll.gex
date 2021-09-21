@@ -1,0 +1,9 @@
+[General]
+Name=fppayroll
+Project=1
+[Classes]
+Count=4
+Class0="TIntroForm","TForm","FlexiPackPayrollIntro","0","D:\Erwin's Files\Project\STCS\Zaneco\Desktop Program\Flex payoll\FlexiPackPayrollIntro.pas"
+Class1="TPayrollData","TDataModule","Data","0","D:\Erwin's Files\Project\STCS\Zaneco\Desktop Program\Flex payoll\Data.pas"
+Class2="TFPPayrollMainMenuForm","TForm","FlexMenu","14","D:\Erwin's Files\Project\STCS\Zaneco\Desktop Program\Flex payoll\FlexMenu.pas"
+Class3="TDeptForm","TForm","dept","10","D:\Erwin's Files\Project\STCS\Zaneco\Desktop Program\Flex payoll\dept.pas"

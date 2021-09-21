@@ -1,0 +1,584 @@
+object frmYearEndAlphaListFB: TfrmYearEndAlphaListFB
+  Left = 380
+  Top = 201
+  Caption = 'AlphaList Forwarded balance'
+  ClientHeight = 425
+  ClientWidth = 602
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object NxLabel1: TNxLabel
+    Left = 16
+    Top = 10
+    Width = 32
+    Height = 13
+    Caption = 'search'
+    HorizontalPosition = hpLeft
+    InnerHorizontal = True
+    InnerVertical = False
+    InnerMargins.Horizontal = 0
+    InnerMargins.Vertical = 2
+    VerticalPosition = vpTop
+  end
+  object nlAddFB: TNxLabel
+    Left = 457
+    Top = 42
+    Width = 19
+    Height = 13
+    Caption = 'Add'
+    OnClick = nlAddFBClick
+    HorizontalPosition = hpLeft
+    InnerHorizontal = True
+    InnerVertical = False
+    InnerMargins.Horizontal = 0
+    InnerMargins.Vertical = 2
+    VerticalPosition = vpTop
+  end
+  object nlEditFB: TNxLabel
+    Left = 505
+    Top = 42
+    Width = 18
+    Height = 13
+    Caption = 'Edit'
+    OnClick = nlEditFBClick
+    HorizontalPosition = hpLeft
+    InnerHorizontal = True
+    InnerVertical = False
+    InnerMargins.Horizontal = 0
+    InnerMargins.Vertical = 2
+    VerticalPosition = vpTop
+  end
+  object nlDeleteFB: TNxLabel
+    Left = 553
+    Top = 42
+    Width = 31
+    Height = 13
+    Caption = 'Delete'
+    OnClick = nlDeleteFBClick
+    HorizontalPosition = hpLeft
+    InnerHorizontal = True
+    InnerVertical = False
+    InnerMargins.Horizontal = 0
+    InnerMargins.Vertical = 2
+    VerticalPosition = vpTop
+  end
+  object neSearch: TNxEdit
+    Left = 56
+    Top = 7
+    Width = 241
+    Height = 21
+    TabOrder = 0
+    OnChange = neSearchChange
+  end
+  object crdbForwardedBalance: TCRDBGrid
+    Left = 8
+    Top = 64
+    Width = 585
+    Height = 353
+    OptionsEx = [dgeEnableSort, dgeLocalFilter, dgeLocalSorting]
+    DataSource = dsForwardedBalance
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'empnumber'
+        Title.Caption = 'EMP #'
+        Width = 94
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'bionumber'
+        Title.Caption = 'BIO #'
+        Width = 94
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'LastName'
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'FirstName'
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'MiddleName'
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Taxable'
+        Width = 80
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'nonTaxable'
+        Width = 80
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'WTax'
+        Width = 80
+        Visible = True
+      end>
+  end
+  object rgSearchOption: TRadioGroup
+    Left = 9
+    Top = 28
+    Width = 300
+    Height = 35
+    Caption = 'Search Option'
+    Columns = 4
+    ItemIndex = 0
+    Items.Strings = (
+      'Emp No.'
+      'Bio No.'
+      'LastName'
+      'FirstName')
+    TabOrder = 3
+  end
+  object nhpAlphaList: TNxHeaderPanel
+    Left = 64
+    Top = 96
+    Width = 385
+    Height = 257
+    Caption = 'Alpha List Forwarded Balance Entry'
+    HeaderFont.Charset = DEFAULT_CHARSET
+    HeaderFont.Color = clWindowText
+    HeaderFont.Height = -11
+    HeaderFont.Name = 'MS Sans Serif'
+    HeaderFont.Style = []
+    ParentHeaderFont = False
+    TabOrder = 4
+    FullWidth = 385
+    object NxLabel2: TNxLabel
+      Left = 24
+      Top = 48
+      Width = 86
+      Height = 13
+      Caption = 'Employee Number'
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
+    object NxLabel3: TNxLabel
+      Left = 56
+      Top = 72
+      Width = 55
+      Height = 13
+      Caption = 'Bio Number'
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
+    object NxLabel4: TNxLabel
+      Left = 60
+      Top = 96
+      Width = 51
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Last Name'
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
+    object NxLabel5: TNxLabel
+      Left = 61
+      Top = 120
+      Width = 50
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'First Name'
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
+    object NxLabel6: TNxLabel
+      Left = 73
+      Top = 144
+      Width = 38
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Taxable'
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
+    object NxLabel7: TNxLabel
+      Left = 50
+      Top = 168
+      Width = 61
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Non Taxable'
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
+    object NxLabel8: TNxLabel
+      Left = 29
+      Top = 192
+      Width = 82
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'With Holding Tax'
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
+    object NxLabel9: TNxLabel
+      Left = 73
+      Top = 216
+      Width = 38
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Benefits'
+      HorizontalPosition = hpLeft
+      InnerHorizontal = True
+      InnerVertical = False
+      InnerMargins.Horizontal = 0
+      InnerMargins.Vertical = 2
+      VerticalPosition = vpTop
+    end
+    object DBEdit1: TDBEdit
+      Left = 116
+      Top = 47
+      Width = 121
+      Height = 21
+      DataField = 'empnumber'
+      DataSource = dsForwardedBalance
+      TabOrder = 0
+      OnChange = DBEdit1Change
+      OnKeyPress = DBEdit1KeyPress
+    end
+    object DBEdit2: TDBEdit
+      Left = 116
+      Top = 71
+      Width = 121
+      Height = 21
+      DataField = 'bionumber'
+      DataSource = dsForwardedBalance
+      TabOrder = 1
+    end
+    object DBEdit3: TDBEdit
+      Left = 116
+      Top = 95
+      Width = 245
+      Height = 21
+      DataField = 'LastName'
+      DataSource = dsForwardedBalance
+      TabOrder = 2
+    end
+    object DBEdit4: TDBEdit
+      Left = 116
+      Top = 119
+      Width = 245
+      Height = 21
+      DataField = 'FirstName'
+      DataSource = dsForwardedBalance
+      TabOrder = 3
+    end
+    object DBEdit5: TDBEdit
+      Left = 116
+      Top = 143
+      Width = 245
+      Height = 21
+      DataField = 'Taxable'
+      DataSource = dsForwardedBalance
+      TabOrder = 4
+    end
+    object DBEdit6: TDBEdit
+      Left = 116
+      Top = 167
+      Width = 245
+      Height = 21
+      DataField = 'nonTaxable'
+      DataSource = dsForwardedBalance
+      TabOrder = 5
+    end
+    object DBEdit7: TDBEdit
+      Left = 116
+      Top = 191
+      Width = 245
+      Height = 21
+      DataField = 'WTax'
+      DataSource = dsForwardedBalance
+      TabOrder = 6
+    end
+    object NxButton1: TNxButton
+      Left = 280
+      Top = 48
+      Width = 75
+      Height = 21
+      Caption = 'Save'
+      TabOrder = 8
+      OnClick = NxButton1Click
+    end
+    object NxButton2: TNxButton
+      Left = 280
+      Top = 72
+      Width = 75
+      Height = 21
+      Caption = 'Cancel'
+      TabOrder = 9
+      OnClick = NxButton2Click
+    end
+    object DBEdit8: TDBEdit
+      Left = 116
+      Top = 215
+      Width = 245
+      Height = 21
+      DataField = 'benefits'
+      DataSource = dsForwardedBalance
+      TabOrder = 7
+    end
+  end
+  object crdbEmployeeList: TCRDBGrid
+    Left = 472
+    Top = 208
+    Width = 433
+    Height = 120
+    OptionsEx = [dgeEnableSort, dgeLocalFilter, dgeLocalSorting]
+    DataSource = dsquEmployee
+    Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+    ReadOnly = True
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = []
+    Visible = False
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'empnumber'
+        Title.Caption = 'Emp#'
+        Width = 34
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'bionumber'
+        Title.Caption = 'Bio#'
+        Width = 58
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'LastName'
+        Width = 120
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'FirstName'
+        Width = 120
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'MiddleName'
+        Width = 184
+        Visible = True
+      end>
+  end
+  object ForwardedBalance: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO alphalistfb'
+      
+        '  (empNumber, bioNumber, idemployee, nonTaxable, Taxable, WTax, ' +
+        'Benefits)'
+      'VALUES'
+      
+        '  (:empNumber, :bioNumber, :idemployee, :nonTaxable, :Taxable, :' +
+        'WTax, :Benefits)')
+    SQLDelete.Strings = (
+      'DELETE FROM alphalistfb'
+      'WHERE'
+      '  idalphalistfb = :Old_idalphalistfb')
+    SQLUpdate.Strings = (
+      'UPDATE alphalistfb'
+      'SET'
+      
+        '  empNumber = :empNumber, bioNumber = :bioNumber, idemployee = :' +
+        'idemployee, nonTaxable = :nonTaxable, Taxable = :Taxable, WTax =' +
+        ' :WTax, Benefits = :Benefits'
+      'WHERE'
+      '  idalphalistfb = :Old_idalphalistfb')
+    SQLRefresh.Strings = (
+      
+        'SELECT empNumber, bioNumber, idemployee, nonTaxable, Taxable, WT' +
+        'ax, Benefits FROM alphalistfb'
+      'WHERE'
+      '  idalphalistfb = :idalphalistfb')
+    Connection = PayrollData.MyConnection1
+    SQL.Strings = (
+      'select'
+      '  afb.idEmployee,'
+      '  afb.empnumber,'
+      '  afb.bionumber,'
+      '  afb.benefits,'
+      '  e.LastName,'
+      '  e.FirstName,'
+      '  e.MiddleName,'
+      '  afb.nonTaxable,'
+      '  afb.Taxable,'
+      '  afb.WTax'
+      'from alphalistfb afb'
+      'inner join employee e on e.idemployee = afb.idemployee')
+    Left = 24
+    Top = 72
+    object ForwardedBalanceidEmployee: TLargeintField
+      FieldName = 'idEmployee'
+    end
+    object ForwardedBalanceempnumber: TStringField
+      FieldName = 'empnumber'
+      Size = 15
+    end
+    object ForwardedBalancebionumber: TStringField
+      FieldName = 'bionumber'
+      Size = 15
+    end
+    object ForwardedBalancebenefits: TFloatField
+      FieldName = 'benefits'
+    end
+    object ForwardedBalanceLastName: TStringField
+      FieldName = 'LastName'
+      Size = 30
+    end
+    object ForwardedBalanceFirstName: TStringField
+      FieldName = 'FirstName'
+      Size = 30
+    end
+    object ForwardedBalanceMiddleName: TStringField
+      FieldName = 'MiddleName'
+      Size = 30
+    end
+    object ForwardedBalancenonTaxable: TFloatField
+      FieldName = 'nonTaxable'
+    end
+    object ForwardedBalanceTaxable: TFloatField
+      FieldName = 'Taxable'
+    end
+    object ForwardedBalanceWTax: TFloatField
+      FieldName = 'WTax'
+    end
+  end
+  object quemployee: TMyQuery
+    SQLInsert.Strings = (
+      'INSERT INTO alphalistfb'
+      '  (empNumber, bioNumber, idemployee, nonTaxable, Taxable, WTax)'
+      'VALUES'
+      
+        '  (:empNumber, :bioNumber, :idemployee, :nonTaxable, :Taxable, :' +
+        'WTax)')
+    SQLDelete.Strings = (
+      'DELETE FROM alphalistfb'
+      'WHERE'
+      '  idAlphaListFB = :Old_idAlphaListFB')
+    SQLUpdate.Strings = (
+      'UPDATE alphalistfb'
+      'SET'
+      
+        '  empNumber = :empNumber, bioNumber = :bioNumber, idemployee = :' +
+        'idemployee, nonTaxable = :nonTaxable, Taxable = :Taxable, WTax =' +
+        ' :WTax'
+      'WHERE'
+      '  idAlphaListFB = :Old_idAlphaListFB')
+    SQLRefresh.Strings = (
+      
+        'SELECT empNumber, bioNumber, idemployee, nonTaxable, Taxable, WT' +
+        'ax FROM alphalistfb'
+      'WHERE'
+      '  idAlphaListFB = :idAlphaListFB')
+    Connection = PayrollData.MyConnection1
+    SQL.Strings = (
+      'select'
+      '  idemployee,'
+      '  empnumber,'
+      '  bionumber,'
+      '  LastName,'
+      '  FirstName,'
+      '  MiddleName'
+      'from employee')
+    Left = 56
+    Top = 72
+    object quemployeeidemployee: TLongWordField
+      FieldName = 'idemployee'
+    end
+    object quemployeeempnumber: TStringField
+      FieldName = 'empnumber'
+      Size = 15
+    end
+    object quemployeebionumber: TStringField
+      FieldName = 'bionumber'
+      Size = 15
+    end
+    object quemployeeLastName: TStringField
+      FieldName = 'LastName'
+      Size = 30
+    end
+    object quemployeeFirstName: TStringField
+      FieldName = 'FirstName'
+      Size = 30
+    end
+    object quemployeeMiddleName: TStringField
+      FieldName = 'MiddleName'
+      Size = 30
+    end
+  end
+  object dsquEmployee: TMyDataSource
+    DataSet = quemployee
+    OnDataChange = dsquEmployeeDataChange
+    Left = 56
+    Top = 192
+  end
+  object dsForwardedBalance: TMyDataSource
+    DataSet = ForwardedBalance
+    OnStateChange = dsForwardedBalanceStateChange
+    Left = 24
+    Top = 192
+  end
+end

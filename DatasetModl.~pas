@@ -1,0 +1,59 @@
+unit DatasetModl;
+
+interface
+
+uses
+  SysUtils, Classes, DB, MemDS, DBAccess, MyAccess;
+
+type
+  TDataSetMod = class(TDataModule)
+    MLCS: TMyQuery;
+    quBudgetChart: TMyQuery;
+    quBudgetChartidchart: TLargeintField;
+    quBudgetChartidpcode: TLargeintField;
+    quBudgetChartdescription: TStringField;
+    quBudgetChartarea: TStringField;
+    quBudgetChartaccountcode: TStringField;
+    quBudgetChartaccountname: TStringField;
+    quBudgetChartpcode: TStringField;
+    quBudgetChartname: TStringField;
+    SearchOPid: TMyQuery;
+    SearchOPididopmaster: TLargeintField;
+    quBudgetInsert: TMyQuery;
+    quBudgetInsertdescription: TStringField;
+    quBudgetInsertNumRec: TLargeintField;
+    quBudgetInsertGross: TFloatField;
+    quBudgetInsertPayrollDeduction: TFloatField;
+    quBudgetInsertarea: TStringField;
+    InsertRegDeductToBudget: TMyQuery;
+    InsertRegDeductToBudgetfirstname: TStringField;
+    InsertRegDeductToBudgetlastname: TStringField;
+    InsertRegDeductToBudgetmiddlename: TStringField;
+    InsertRegDeductToBudgetpagibigno: TStringField;
+    InsertRegDeductToBudgetsssnumber: TStringField;
+    InsertRegDeductToBudgetphilhealthid: TStringField;
+    InsertRegDeductToBudgettin: TStringField;
+    InsertRegDeductToBudgetMonthlySalaryCredit: TStringField;
+    InsertRegDeductToBudgetBracketNum: TStringField;
+    InsertRegDeductToBudgetname: TStringField;
+    InsertRegDeductToBudgetpaymonth: TDateField;
+    InsertRegDeductToBudgetemployeecontribution: TFloatField;
+    InsertRegDeductToBudgetemployercontribution: TFloatField;
+    InsertRegDeductToBudgetemployeecompensation: TFloatField;
+    InsertRegDeductToBudgetdescription: TStringField;
+    InsertRegDeductToBudgetarea: TStringField;
+    DelPmDeduction: TMyQuery;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataSetMod: TDataSetMod;
+
+implementation
+
+{$R *.dfm}
+
+end.

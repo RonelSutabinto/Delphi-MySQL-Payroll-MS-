@@ -1,0 +1,310 @@
+unit Data;
+
+interface
+
+uses
+  SysUtils, Classes, DB, MemDS, DBAccess, MyAccess;
+
+type
+  TPayrollData = class(TDataModule)
+    MyConnection1: TMyConnection;
+    Users: TMyQuery;
+    dsUsers: TDataSource;
+    Company: TMyQuery;
+    dsCompany: TDataSource;
+    UsersUserPassWord: TStringField;
+    UsersUserName: TStringField;
+    UsersUserID: TStringField;
+    UsersUserPic: TBlobField;
+    UsersPosition: TStringField;
+    UsersUserRestriction: TStringField;
+    UsersIdUsers: TLargeintField;
+    Companyidcompany: TLargeintField;
+    Companycompanyname: TStringField;
+    Companyaddress: TStringField;
+    Companylogo: TBlobField;
+    Companyfilename: TStringField;
+    Companycompanyacro: TStringField;
+    DI: TMyQuery;
+    dsDI: TDataSource;
+    DISched: TMyQuery;
+    dsDISched: TDataSource;
+    Loans: TMyQuery;
+    dsLoans: TDataSource;
+    Tax: TMyQuery;
+    dsTax: TDataSource;
+    TaxSched: TMyQuery;
+    dsTaxSched: TDataSource;
+    PayrollMaster: TMyQuery;
+    dsPayrollMaster: TDataSource;
+    Employee: TMyQuery;
+    dsEmployee: TDataSource;
+    Emp201: TMyQuery;
+    Employeeidemployee: TLargeintField;
+    Employeeempnumber: TStringField;
+    Employeesssnumber: TStringField;
+    Employeetin: TStringField;
+    Employeedeptcode: TStringField;
+    Employeefirstname: TStringField;
+    Employeemiddlename: TStringField;
+    Employeelastname: TStringField;
+    Employeeaddress: TStringField;
+    Employeetitle: TStringField;
+    Employeerank: TStringField;
+    Employeebasicpay: TFloatField;
+    Employeewtaxstatus: TStringField;
+    Employeeemppicture: TBlobField;
+    Emp201idemp201: TLargeintField;
+    Emp201empnumber: TStringField;
+    Emp201date201: TDateField;
+    Emp201reference: TStringField;
+    Emp201title: TStringField;
+    Emp201docpicture: TBlobField;
+    Taxidwtax: TLargeintField;
+    Taxwtaxstatus: TStringField;
+    Taxdescription: TStringField;
+    Taxexemptionamount: TFloatField;
+    dsEmp201: TDataSource;
+    PMDeduction: TMyQuery;
+    PMDeductionidpmdeduction: TLargeintField;
+    PMDeductionPaymonth: TDateField;
+    PMDeductionempnumber: TStringField;
+    PMDeductionname: TStringField;
+    PMDeductionfixdeductionindex: TLargeintField;
+    PMDeductionloanschedule: TLargeintField;
+    PMDeductiondescription: TStringField;
+    PMDeductionamount: TFloatField;
+    PMDeductionemployeecontribution: TFloatField;
+    PMDeductionemployercontribution: TFloatField;
+    PMDeductionemployeecompensation: TFloatField;
+    dsPMDeduction: TDataSource;
+    DIiddeductionindex: TLargeintField;
+    DIdescription: TStringField;
+    DIOtherSpec: TStringField;
+    Loansidloanschedule: TLargeintField;
+    Loansempnumber: TStringField;
+    LoansName: TStringField;
+    Loansdescription: TStringField;
+    Loansdatereleased: TDateField;
+    Loansprincipal: TFloatField;
+    Loansinterest: TFloatField;
+    Loanstotalloan: TFloatField;
+    Loansmonths: TLargeintField;
+    Loansmonthlydeduction: TFloatField;
+    Loanstotalpayment: TFloatField;
+    Loansloanstatus: TStringField;
+    Emp201idemployee: TFloatField;
+    EmpLeave: TMyQuery;
+    dsEmpLeave: TDataSource;
+    PMDeductionidemployee: TFloatField;
+    PMDeductionpaycode: TStringField;
+    DISchediddeductionschedule: TLargeintField;
+    DIScheddeductionindex: TFloatField;
+    DIScheddescription: TStringField;
+    DISchedrangefrom: TFloatField;
+    DISchedrangeto: TFloatField;
+    DISchedemployeecontribution: TFloatField;
+    DISchedemployercontribution: TFloatField;
+    DISchedemployeecompensation: TFloatField;
+    EmpLeaveidempleavecredits: TLargeintField;
+    EmpLeaveidemployee: TFloatField;
+    EmpLeaveDatePosted: TDateField;
+    EmpLeaveRemarks: TStringField;
+    EmpLeaveempnumber: TStringField;
+    EmpLeaveLeaveIn: TFloatField;
+    EmpLeaveLeaveOut: TFloatField;
+    EmpLeaveLeaveDesc: TStringField;
+    EmpLeavedescription: TStringField;
+    TaxSchedidwtaxschedule: TLargeintField;
+    TaxSchedidwtax: TFloatField;
+    TaxSchedwtaxstatus: TStringField;
+    TaxSchedrangefrom: TFloatField;
+    TaxSchedrangeto: TFloatField;
+    TaxSchedfixtax: TFloatField;
+    TaxSchedexcesspercent: TFloatField;
+    Loansidemployee: TFloatField;
+    Taxtaxtabletype: TStringField;
+    Employeebionumber: TStringField;
+    Employeedateemployed: TDateTimeField;
+    EmployeePagibigNo: TStringField;
+    Employeemonthlyleave: TFloatField;
+    Employeedepartmentname: TStringField;
+    EmployeeDailyRate: TFloatField;
+    Dept: TMyQuery;
+    Deptiddepartment: TLargeintField;
+    Deptdepartmentcode: TStringField;
+    Deptdepartmentname: TStringField;
+    dsDepartment: TDataSource;
+    Employeeemployeestatus: TStringField;
+    DIAcode: TStringField;
+    EmployeeFBSickLeave: TFloatField;
+    EmployeeFBVacationLeave: TFloatField;
+    Employeedependents: TMemoField;
+    Accountchart: TMyQuery;
+    dsAccountChart: TDataSource;
+    DepartmentEntry: TMyTable;
+    DepartmentEntryiddepartment: TLargeintField;
+    DepartmentEntrydepartmentcode: TStringField;
+    DepartmentEntrydepartmentname: TStringField;
+    DepartmentEntryselecteddepartment: TBooleanField;
+    EmployeeBDay: TDateField;
+    EmployeePhilhealthId: TStringField;
+    CompanysssNumber: TStringField;
+    CompanyphilHealthNumber: TStringField;
+    CompanypagibigNumber: TStringField;
+    Companytin: TStringField;
+    DISchedOtherRepRef: TFloatField;
+    EmpLeaveEntryType: TWordField;
+    CompanyZipCode: TStringField;
+    CompanyContactNum: TStringField;
+    DescriptionListing: TMyQuery;
+    DescriptionListingidDescriptionListing: TLargeintField;
+    DescriptionListingDescription: TStringField;
+    DescriptionListingAccountCode: TStringField;
+    TaxSchedOverTimeMultiplier: TFloatField;
+    Rank: TMyTable;
+    RankidRankPos: TLargeintField;
+    RankRank: TLargeintField;
+    RankDescription: TStringField;
+    RankBasicPay: TFloatField;
+    Employeemiddleinitial: TStringField;
+    EmployeeisFlexiTime: TBooleanField;
+    Accountchartidaccountchart: TIntegerField;
+    Accountchartidchart: TLargeintField;
+    Accountchartidemployee: TLargeintField;
+    Accountchartdescription: TStringField;
+    Accountchartempnumber: TStringField;
+    Accountchartaccountcode: TStringField;
+    Accountchartaccountname: TStringField;
+    DepartmentEntryArea: TStringField;
+    PayrollMasteridpayrollmaster: TLargeintField;
+    PayrollMasteridemployee: TFloatField;
+    PayrollMasterpaymonth: TDateField;
+    PayrollMasterdescription: TStringField;
+    PayrollMasterempnumber: TStringField;
+    PayrollMastername: TStringField;
+    PayrollMasterdeptcode: TStringField;
+    PayrollMasterbasicpay: TFloatField;
+    PayrollMasterDifferential: TFloatField;
+    PayrollMasterUnpaidAmt: TFloatField;
+    PayrollMasterNumUnpaidDays: TFloatField;
+    PayrollMasterUnpaidRate: TFloatField;
+    PayrollMasterpremiumpay: TFloatField;
+    PayrollMasterRegOtPay: TFloatField;
+    PayrollMasterSpcOTPay: TFloatField;
+    PayrollMasterRestOtPay: TFloatField;
+    PayrollMasterRestOtExPay: TFloatField;
+    PayrollMasterLegOTPay: TFloatField;
+    PayrollMasterLegOtExPay: TFloatField;
+    PayrollMasterLegRestOtPay: TFloatField;
+    PayrollMasterSpcOtExPay: TFloatField;
+    PayrollMasternsd: TFloatField;
+    PayrollMasterundertime: TFloatField;
+    PayrollMasterabsences: TFloatField;
+    PayrollMasterriceallowance: TFloatField;
+    PayrollMasterhazard: TFloatField;
+    PayrollMasterlighting: TFloatField;
+    PayrollMasterMonth13: TFloatField;
+    PayrollMasterBonus: TFloatField;
+    PayrollMasterOtherPay: TFloatField;
+    PayrollMasterPAGIBIGCont: TFloatField;
+    PayrollMasterSSSCont: TFloatField;
+    PayrollMasterPhilHealth: TFloatField;
+    PayrollMasterWTax: TFloatField;
+    PayrollMasterOtherDeduction: TFloatField;
+    PayrollMasternetpay: TFloatField;
+    PayrollMasterpaycode: TLargeintField;
+    PayrollMasterwtaxstatus: TStringField;
+    PayrollMastertaxable: TFloatField;
+    PayrollMasterRegOtHrs: TFloatField;
+    PayrollMasterSpcOTHrs: TFloatField;
+    PayrollMasterRestOtHrs: TFloatField;
+    PayrollMasterRestOtExHrs: TFloatField;
+    PayrollMasterLegOTHrs: TFloatField;
+    PayrollMasterLegOtExHrs: TFloatField;
+    PayrollMasterLegRestOtExPay: TFloatField;
+    PayrollMasterLegRestOtHrs: TFloatField;
+    PayrollMasterLegRestOtExHrs: TFloatField;
+    PayrollMasterSpcOtExHrs: TFloatField;
+    PayrollMasterNSDHrs: TFloatField;
+    PayrollMasterUndertimeHrs: TFloatField;
+    PayrollMasterAbsencesDays: TFloatField;
+    PayrollMasterPremiumDays: TFloatField;
+    PayrollMasterTardiHrs: TFloatField;
+    PayrollMasterDailyRate: TFloatField;
+    PayrollMasteremployeestatus: TStringField;
+    PayrollMasterDayPresent: TFloatField;
+    PayrollMasterTardi: TFloatField;
+    PayrollMasterperMonetize: TFloatField;
+    PayrollMasterperLeaveCredits: TFloatField;
+    PayrollMasterRegOTRate: TFloatField;
+    PayrollMasterSpcOTRate: TFloatField;
+    PayrollMasterSpcExOTRate: TFloatField;
+    PayrollMasterLegOTRate: TFloatField;
+    PayrollMasterLegExOTRate: TFloatField;
+    PayrollMasterLegRestOTRate: TFloatField;
+    PayrollMasterLegRestExOTRate: TFloatField;
+    PayrollMasterisLock: TWordField;
+    PayrollMasterarea: TStringField;
+    PayrollMasterDF: TDateTimeField;
+    PayrollMasterDT: TDateTimeField;
+    PMDeductionpaydesc: TStringField;
+    Accountchartpaycode: TStringField;
+    PayrollMasterprorate: TFloatField;
+    PayrollMasterprerate: TFloatField;
+    EmpLeaveOT: TWordField;
+    PayrollMasterSpcRestOTRate: TFloatField;
+    PayrollMasterSpcRestHrs: TFloatField;
+    PayrollMasterSpcRestpay: TFloatField;
+    PMDeductionactualremittance: TFloatField;
+    NR3001dk: TMyQuery;
+    NR3001dklastname: TStringField;
+    NR3001dkfirstname: TStringField;
+    NR3001dkmiddlename: TStringField;
+    NR3001dksssnumber: TStringField;
+    NR3001dkSSSContribution: TFloatField;
+    NR3001dkCompensation: TFloatField;
+    PayrollYear: TMyQuery;
+    procedure LoansCalcFields(DataSet: TDataSet);
+    procedure EmpLeaveCalcFields(DataSet: TDataSet);
+    procedure DataModuleCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    Version : String;
+  end;
+
+  Const Ver : String = '1.0.0.25';
+
+var
+  PayrollData: TPayrollData;
+
+implementation
+
+uses StrUtils, MaskUtils, ModTools, Math;
+
+{$R *.dfm}
+
+procedure TPayrollData.LoansCalcFields(DataSet: TDataSet);
+begin
+  Loansloanstatus.Text := 'OL';
+  If RoundTo(Loanstotalloan.AsCurrency,-1) = RoundTo(Loanstotalpayment.AsCurrency,-1) then Loansloanstatus.Text := 'FULLY PAID';
+end;
+
+procedure TPayrollData.EmpLeaveCalcFields(DataSet: TDataSet);
+begin
+  If EmpLeaveLeaveDesc.Text = '1' then EmpLeavedescription.Text := 'VACATION LEAVE';
+  If EmpLeaveLeaveDesc.Text = '2' then EmpLeavedescription.Text := 'SICK LEAVE';
+  If EmpLeaveLeaveDesc.Text = '3' then EmpLeavedescription.Text := 'SPECIAL LEAVE';
+end;
+
+procedure TPayrollData.DataModuleCreate(Sender: TObject);
+begin
+  Version := Ver;
+end;
+
+end.
+
+
+

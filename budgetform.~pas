@@ -1,0 +1,264 @@
+unit budgetform;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, NxCollection, StdCtrls, Mask, DBCtrls, DB, DBAccess, MyAccess,
+  MemDS, Grids, DBGrids, CRGrid, STCSPayrollLib;
+
+type
+  TBudgetoptForm = class(TForm)
+    NxHeaderPanel7: TNxHeaderPanel;
+    Label199: TLabel;
+    Label201: TLabel;
+    Label202: TLabel;
+    Label204: TLabel;
+    Label207: TLabel;
+    Label208: TLabel;
+    Label209: TLabel;
+    Label210: TLabel;
+    Label211: TLabel;
+    NxButton91: TNxButton;
+    NxButton93: TNxButton;
+    NxButton94: TNxButton;
+    gridsearch: TCRDBGrid;
+    PayeeSearch: TMyQuery;
+    dsPayeeSearch: TMyDataSource;
+    paytobudgetchart: TMyQuery;
+    dspaytobudget: TMyDataSource;
+    Label205: TLabel;
+    PayeeSearchPCode: TStringField;
+    PayeeSearchName: TStringField;
+    CRDBGrid1: TCRDBGrid;
+    MyQuery1: TMyQuery;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    LargeintField1: TLargeintField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    LargeintField2: TLargeintField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    LargeintField3: TLargeintField;
+    StringField7: TStringField;
+    StringField8: TStringField;
+    LargeintField4: TLargeintField;
+    StringField9: TStringField;
+    StringField10: TStringField;
+    StringField11: TStringField;
+    ds: TMyDataSource;
+    SearchAccount: TMyQuery;
+    dsSearchAccount: TMyDataSource;
+    SearchAccountaccountcode: TStringField;
+    SearchAccountaccountname: TStringField;
+    paytobudgetchartidchart: TLargeintField;
+    paytobudgetchartidpcode: TLargeintField;
+    paytobudgetchartaccountcode: TStringField;
+    paytobudgetchartaccountname: TStringField;
+    paytobudgetchartpcode: TStringField;
+    paytobudgetchartname: TStringField;
+    CRDBGrid2: TCRDBGrid;
+    nhpBO: TNxHeaderPanel;
+    boADD: TNxLinkLabel;
+    boEDIT: TNxLinkLabel;
+    boDELETE: TNxLinkLabel;
+    paytobudgetchartdescription: TStringField;
+    Label196: TLabel;
+    Label212: TLabel;
+    DBEdit200: TDBEdit;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Label4: TLabel;
+    ComboBox1: TComboBox;
+    NxButton1: TNxButton;
+    NxButton2: TNxButton;
+    SearchAccountidchart: TLargeintField;
+    PayeeSearchidpayee: TLargeintField;
+    ComboBox2: TComboBox;
+    Label5: TLabel;
+    procedure DBEdit200Change(Sender: TObject);
+    procedure DBEdit200Enter(Sender: TObject);
+    procedure DBEdit203Enter(Sender: TObject);
+    procedure DBEdit206Enter(Sender: TObject);
+    procedure DBEdit209Enter(Sender: TObject);
+    procedure DBEdit200KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEdit203KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEdit206KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEdit209KeyPress(Sender: TObject; var Key: Char);
+    procedure DBEdit202KeyPress(Sender: TObject; var Key: Char);
+    procedure NxButton91Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure NxButton94Click(Sender: TObject);
+    procedure boADDClick(Sender: TObject);
+    procedure NxButton1Click(Sender: TObject);
+    procedure paytobudgetchartBeforePost(DataSet: TDataSet);
+    procedure gridsearchKeyPress(Sender: TObject; var Key: Char);
+    procedure DBEdit2Change(Sender: TObject);
+    procedure CRDBGrid1KeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    counter : integer;
+    holder  : integer;
+  end;
+
+var
+  BudgetoptForm: TBudgetoptForm;
+
+implementation
+
+uses Data, FlexMenu, DateUtils;
+
+{$R *.dfm}
+
+procedure TBudgetoptForm.DBEdit200Change(Sender: TObject);
+begin
+ PayeeSearch.Close;
+ PayeeSearch.ParamByName('Name').Text := '%' + dbedit200.Text + '%';
+ PayeeSearch.Open;
+
+ ShowPanelGrid(gridsearch,dbedit200,nhpBO);
+end;
+
+procedure TBudgetoptForm.DBEdit200Enter(Sender: TObject);
+begin
+    holder := 1;
+end;
+
+procedure TBudgetoptForm.DBEdit203Enter(Sender: TObject);
+begin
+  holder := 2;
+end;
+
+procedure TBudgetoptForm.DBEdit206Enter(Sender: TObject);
+begin
+ holder := 3;
+end;
+
+procedure TBudgetoptForm.DBEdit209Enter(Sender: TObject);
+begin
+ holder := 4;
+end;
+
+procedure TBudgetoptForm.DBEdit200KeyPress(Sender: TObject; var Key: Char);
+begin
+ if (key = #13) and (gridsearch.Visible) then
+  begin
+   gridsearch.SetFocus;
+  end;
+end;
+
+procedure TBudgetoptForm.DBEdit203KeyPress(Sender: TObject; var Key: Char);
+begin
+ if (key = #13) and (gridsearch.Visible) then
+  begin
+   gridsearch.SetFocus;
+  end;
+end;
+
+procedure TBudgetoptForm.DBEdit206KeyPress(Sender: TObject; var Key: Char);
+begin
+ if (key = #13) and (gridsearch.Visible) then
+  begin
+   gridsearch.SetFocus;
+  end;
+end;
+
+procedure TBudgetoptForm.DBEdit209KeyPress(Sender: TObject; var Key: Char);
+begin
+ if (key = #13) and (gridsearch.Visible) then
+  begin
+   gridsearch.SetFocus;
+  end;
+end;
+
+procedure TBudgetoptForm.DBEdit202KeyPress(Sender: TObject; var Key: Char);
+begin
+ if (key = #13) and (crdbgrid1.Visible) then
+  begin
+   crdbgrid1.SetFocus;
+  end;
+end;
+
+procedure TBudgetoptForm.NxButton91Click(Sender: TObject);
+begin
+ if paytobudgetchart.IsEmpty then
+  begin
+   paytobudgetchart.Append;
+  end
+ else
+  begin
+   paytobudgetchart.Edit;
+  end;
+
+end;
+
+procedure TBudgetoptForm.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+
+   Action := caFree;
+   BudgetoptForm := Nil;
+end;
+
+procedure TBudgetoptForm.NxButton94Click(Sender: TObject);
+begin
+ close;
+end;
+
+procedure TBudgetoptForm.boADDClick(Sender: TObject);
+begin
+ paytobudgetchart.Open;
+ paytobudgetchart.Append;
+end;
+
+procedure TBudgetoptForm.NxButton1Click(Sender: TObject);
+begin
+ paytobudgetchart.Post;
+end;
+
+procedure TBudgetoptForm.paytobudgetchartBeforePost(DataSet: TDataSet);
+begin
+  paytobudgetchartidchart.AsInteger := SearchAccountidchart.AsInteger;
+  paytobudgetchartidpcode.AsInteger := PayeeSearchidpayee.AsInteger;
+end;
+
+procedure TBudgetoptForm.gridsearchKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if key = #13 then
+   begin
+    dbedit200.Text :=  PayeeSearchPCode.Text;
+    dbedit1.Text   :=  PayeeSearchName.Text;
+   end;
+
+   gridsearch.Visible := false;
+end;
+
+procedure TBudgetoptForm.DBEdit2Change(Sender: TObject);
+begin
+  SearchAccount.ParamByName('AC').Text := '%' + dbedit2.Text + '%';
+  searchaccount.ParamByName('Date').Text := FormatDateTime('YYYY-MM-DD',EndOfTheYear(now));
+  SearchAccount.Open;
+
+  ShowPanelGrid(crdbgrid1,dbedit2,nhpbo);
+  
+end;
+
+procedure TBudgetoptForm.CRDBGrid1KeyPress(Sender: TObject; var Key: Char);
+begin
+ if key = #13 then
+  begin
+   dbedit2.text := SearchAccountaccountcode.Text;
+   dbedit3.Text := SearchAccountaccountname.Text;
+  end;
+  crdbgrid1.Visible := false;
+end;
+
+end.

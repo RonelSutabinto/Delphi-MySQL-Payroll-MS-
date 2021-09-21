@@ -1,0 +1,66 @@
+unit searchemployeeFrm;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, AdvSmoothLabel, AdvSmoothButton,
+  Vcl.Grids, Vcl.DBGrids, CRGrid, Vcl.StdCtrls, AdvEdit, Vcl.ExtCtrls, AdvPanel,
+  Data.DB, MemDS, DBAccess, MyAccess;
+
+type
+  TsearchEmployee = class(TForm)
+    AdvPanel2: TAdvPanel;
+    Label1: TLabel;
+    AdvEdit1: TAdvEdit;
+    AdvSmoothButton3: TAdvSmoothButton;
+    AdvPanel1: TAdvPanel;
+    AdvSmoothLabel1: TAdvSmoothLabel;
+    AdvPanel3: TAdvPanel;
+    AdvSmoothButton9: TAdvSmoothButton;
+    AdvSmoothButton1: TAdvSmoothButton;
+    CRDBGrid1: TCRDBGrid;
+    empQ: TMyQuery;
+    empQidemployee: TLongWordField;
+    empQempnumber: TStringField;
+    empQname: TStringField;
+    empQdepartment: TStringField;
+    empQempstatus: TStringField;
+    empDS: TMyDataSource;
+    procedure AdvSmoothButton3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  searchEmployee: TsearchEmployee;
+
+implementation
+
+{$R *.dfm}
+
+uses Data;
+
+procedure TsearchEmployee.AdvSmoothButton3Click(Sender: TObject);
+begin
+  empQ.Close;
+  empQ.ParamByName('name').Text := '%'+AdvEdit1.Text+'%';
+  empQ.Open;
+
+  {Select
+	 ,
+	 empnumber,
+	 concat(firstname,' ',middleinitial,', ',lastname) as name,
+	 departmentname as department,
+	 case employeestatus
+	   when 'C' then 'Casual'
+	   when 'R' then 'Regular'
+	   ELSE ''
+	 END as empstatus
+ from employee
+ where concat(firstname,' ',middleinitial,', ',lastname) like :name}
+end;
+
+end.

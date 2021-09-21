@@ -1,0 +1,62 @@
+unit pagibigsavingsDetail;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, NxCollection, Vcl.Grids, Vcl.DBGrids,
+  CRGrid, AdvSmoothLabel, Vcl.ExtCtrls, AdvPanel, Vcl.StdCtrls, AdvEdit, advlued,
+  Data.DB, MemDS, DBAccess, MyAccess;
+
+type
+  TpagibigsavingsDetailsFrm = class(TForm)
+    AdvPanel1: TAdvPanel;
+    AdvSmoothLabel1: TAdvSmoothLabel;
+    CRDBGrid1: TCRDBGrid;
+    AdvPanel2: TAdvPanel;
+    NxLinkLabel1: TNxLinkLabel;
+    AdvPanel3: TAdvPanel;
+    name_tf: TAdvLUEdit;
+    Label11: TLabel;
+    Label2: TLabel;
+    empnumber_tf: TAdvLUEdit;
+    Label3: TLabel;
+    department_tf: TAdvLUEdit;
+    Label1: TLabel;
+    total_label: TLabel;
+    sdetailQ: TMyQuery;
+    sdetailDS: TMyDataSource;
+    sdetailQidpmdeduction: TLongWordField;
+    sdetailQidemployee: TFloatField;
+    sdetailQPaymonth: TDateField;
+    sdetailQempnumber: TStringField;
+    sdetailQname: TStringField;
+    sdetailQfixdeductionindex: TLongWordField;
+    sdetailQloanschedule: TLongWordField;
+    sdetailQdescription: TStringField;
+    sdetailQamount: TFloatField;
+    sdetailQemployeecontribution: TFloatField;
+    sdetailQemployercontribution: TFloatField;
+    sdetailQemployeecompensation: TFloatField;
+    sdetailQpaycode: TStringField;
+    sdetailQpaydesc: TStringField;
+    sdetailQactualremittance: TFloatField;
+    sdetailQdepartmentname: TStringField;
+    sdetailQtmountA: TFloatField;
+    sdetailQtotal: TFloatField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  pagibigsavingsDetailsFrm: TpagibigsavingsDetailsFrm;
+
+implementation
+
+{$R *.dfm}
+
+uses Data;
+
+end.

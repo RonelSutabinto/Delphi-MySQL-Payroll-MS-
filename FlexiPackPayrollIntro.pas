@@ -1,0 +1,133 @@
+unit FlexiPackPayrollIntro;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ExtCtrls, StdCtrls,
+  NxEdit, NxCollection, NxFocus, Data.DB, MemDS, DBAccess, MyAccess;
+
+type
+  TIntroForm = class(TForm)
+    Image1: TImage;
+    LogIn: TNxLinkLabel;
+    NxHeaderPanel1: TNxHeaderPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    username: TNxEdit;
+    password: TNxEdit;
+    NxFocus1: TNxFocus;
+    NxLinkLabel1: TNxLinkLabel;
+    lsoftwarever: TLabel;
+    verQ: TMyQuery;
+    verQidversionapp: TIntegerField;
+    verQver: TStringField;
+    procedure FormShow(Sender: TObject);
+    procedure LogInClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure UsernameKeyPress(Sender: TObject; var Key: Char);
+    procedure NxLinkLabel1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  IntroForm: TIntroForm;
+
+implementation
+
+uses Data, FlexMenu, Math;
+
+{$R *.dfm}
+
+procedure TIntroForm.FormShow(Sender: TObject);
+begin
+
+  DoubleBuffered       := True;
+  lsoftwarever.Caption := PayrollData.Version;
+
+  try
+    verQ.Close;
+    verQ.Open;
+    if(verQver.Text<> '1.1.2020-01-21') then
+    begin
+       MessageDlg('Invalid application version update...'+#13#10+'App. Ver.:1.1.2020-01-21', mtError, [mbOK], 0);
+       close;
+    end;
+  except
+     Close;
+  end;
+
+end;
+
+procedure TIntroForm.LogInClick(Sender: TObject);
+begin
+  With PayrollData do
+    begin
+      Users.SQL.Clear;
+      Users.SQL.Add('select * from users');
+      Users.SQL.Add('where username = :username and userpassword = :userpassword');
+      Users.ParamByName('username').Text      := Username.Text;
+      Users.ParamByName('userPassword').Text  := Password.Text;
+      Users.Open;
+
+      If Users.IsEmpty then
+        begin
+          MessageDlg('Invalid userID and password.....', mtError, [mbOK], 0);
+          Username.SetFocus;
+          Users.Close;
+          exit;
+        end;
+
+      Hide;
+      
+      If not Assigned(FPPayrollMainMenuForm) then
+      FPPayrollMainMenuForm := TFPPayrollMainMenuForm.Create(Application);
+      FPPayrollMainMenuForm.MyNoteBook.ActivePage := FPPayrollMainMenuForm.TabHome;
+      FPPayrollMainMenuForm.Caption := FPPayrollMainMenuForm.Caption + ' ' + PayrollData.Version;
+      FPPayrollMainMenuForm.Show;
+    end;
+end;
+
+procedure TIntroForm.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   With PayrollData do
+    begin
+     Users.Close;
+     Company.Close;
+     DI.Close;
+     DISched.Close;
+     Loans.Close;
+     PayrollMaster.Close;
+     PMDeduction.Close;
+     Employee.Close;
+     EmpLeave.Close;
+     Emp201.Close;
+     Tax.Close;
+     TaxSched.Close;
+    end;
+  Action := caFree;
+  IntroForm := Nil;
+end;
+
+procedure TIntroForm.UsernameKeyPress(Sender: TObject; var Key: Char);
+begin
+  If Key = #13 then
+    begin
+     Key := #0;
+     Perform(CM_DIALOGKEY,VK_TAB,0);
+     If (Trim(username.Text) <> '') and (Trim(password.Text) <> '') then
+      begin
+        LogInClick(Sender);
+      end;
+    end;
+end;
+
+procedure TIntroForm.NxLinkLabel1Click(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

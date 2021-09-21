@@ -1,0 +1,485 @@
+object searchEmployee: TsearchEmployee
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'Employee'
+  ClientHeight = 408
+  ClientWidth = 656
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object AdvPanel2: TAdvPanel
+    Left = 0
+    Top = 30
+    Width = 656
+    Height = 317
+    Align = alClient
+    BevelOuter = bvNone
+    BorderStyle = bsSingle
+    Color = 16644337
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 7485192
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    UseDockManager = True
+    Version = '2.3.0.0'
+    BorderColor = 16637593
+    Caption.Color = 16644337
+    Caption.ColorTo = 16576469
+    Caption.Font.Charset = DEFAULT_CHARSET
+    Caption.Font.Color = clBlack
+    Caption.Font.Height = -11
+    Caption.Font.Name = 'Tahoma'
+    Caption.Font.Style = []
+    Caption.GradientDirection = gdVertical
+    Caption.Indent = 2
+    Caption.ShadeLight = 255
+    CollapsColor = clNone
+    CollapsDelay = 0
+    ColorTo = 16576469
+    ShadowColor = clBlack
+    ShadowOffset = 0
+    StatusBar.BorderColor = 16637593
+    StatusBar.BorderStyle = bsSingle
+    StatusBar.Font.Charset = DEFAULT_CHARSET
+    StatusBar.Font.Color = 7485192
+    StatusBar.Font.Height = -11
+    StatusBar.Font.Name = 'Tahoma'
+    StatusBar.Font.Style = []
+    StatusBar.Color = 16644337
+    StatusBar.ColorTo = 16576469
+    StatusBar.GradientDirection = gdVertical
+    Text = ''
+    ExplicitWidth = 646
+    ExplicitHeight = 307
+    FullHeight = 200
+    object Label1: TLabel
+      Left = 25
+      Top = 14
+      Width = 88
+      Height = 14
+      Caption = 'Employee Name'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 7485192
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object AdvEdit1: TAdvEdit
+      Left = 23
+      Top = 33
+      Width = 224
+      Height = 22
+      EmptyTextStyle = []
+      LabelFont.Charset = DEFAULT_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -11
+      LabelFont.Name = 'Tahoma'
+      LabelFont.Style = []
+      Lookup.Font.Charset = DEFAULT_CHARSET
+      Lookup.Font.Color = clWindowText
+      Lookup.Font.Height = -11
+      Lookup.Font.Name = 'Arial'
+      Lookup.Font.Style = []
+      Lookup.Separator = ';'
+      Color = clWindow
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      Text = ''
+      Visible = True
+      OnKeyPress = AdvEdit1KeyPress
+      Version = '3.3.2.0'
+    end
+    object AdvSmoothButton3: TAdvSmoothButton
+      Left = 248
+      Top = 31
+      Width = 25
+      Height = 25
+      Appearance.PictureAlignment = taCenter
+      Appearance.Font.Charset = DEFAULT_CHARSET
+      Appearance.Font.Color = clBlack
+      Appearance.Font.Height = -13
+      Appearance.Font.Name = 'Tahoma'
+      Appearance.Font.Style = [fsBold]
+      Appearance.Spacing = 1
+      Appearance.Rounding = 2
+      Status.Caption = '0'
+      Status.Appearance.Fill.Color = clRed
+      Status.Appearance.Fill.ColorMirror = clNone
+      Status.Appearance.Fill.ColorMirrorTo = clNone
+      Status.Appearance.Fill.GradientType = gtSolid
+      Status.Appearance.Fill.GradientMirrorType = gtSolid
+      Status.Appearance.Fill.BorderColor = clGray
+      Status.Appearance.Fill.Rounding = 0
+      Status.Appearance.Fill.ShadowOffset = 0
+      Status.Appearance.Fill.Glow = gmNone
+      Status.Appearance.Font.Charset = DEFAULT_CHARSET
+      Status.Appearance.Font.Color = clWhite
+      Status.Appearance.Font.Height = -11
+      Status.Appearance.Font.Name = 'Tahoma'
+      Status.Appearance.Font.Style = []
+      Bevel = False
+      BevelColor = clBlack
+      Color = 4227072
+      ParentFont = False
+      Picture.Data = {
+        89504E470D0A1A0A0000000D494844520000001200000012080600000056CE8E
+        57000000097048597300000B1300000B1301009A9C18000000206348524D0000
+        7A25000080830000F9FF000080E9000075300000EA6000003A980000176F925F
+        C546000001354944415478DAACD4BB4A1C611806E067DD1504231E905C400AB5
+        B788DAAA8D0A5E8169035E410AADCC626540F08422D8880ADE81225B584A1211
+        56827DB05144481A0F63F32D2C7B98F5F495331F0FFFBCFFCB649224F12E5303
+        1AC23A8AF8833D8C239B6A54405F708D7FF88533DCE201B3687A0E348504DB18
+        C4083AD187C578976F040DE106BBE8C5010A682FDB9F0FEC731AB481FF18C021
+        BEA1B562BF037FB19606152393511CA704BB1FB95541A5F0B2C8E10493116EAD
+        B98FBDAA2941A7F814C7BFAA83B4A03F4E5EB74763B8C3524AE5A623ECE1B48C
+        729889C5EFE82ADB6BC3573C620B1F916954C8B9C02E23D81D5CC4B34DF4E027
+        161A41A202AB713BE751D05174E377A0A57266D2A07AD38C1F6550125FF0E1A5
+        5069F215D8F26BA14AACF016A8052B38C244922432EFF5637B1A0089559FC7E7
+        FCF5900000000049454E44AE426082}
+      DisabledColor = 8404992
+      TabOrder = 1
+      ShowFocus = False
+      Version = '2.0.1.0'
+      OnClick = AdvSmoothButton3Click
+    end
+    object CRDBGrid1: TCRDBGrid
+      Left = 0
+      Top = 71
+      Width = 652
+      Height = 242
+      Align = alBottom
+      DataSource = empDS
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+      ParentFont = False
+      TabOrder = 2
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -12
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'idemployee'
+          Width = -1
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'empnumber'
+          Title.Caption = 'Emp.No.'
+          Width = 84
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'name'
+          Width = 196
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'department'
+          Title.Caption = 'Department'
+          Width = 199
+          Visible = True
+          FloatPrecision = 12
+          FloatDigits = 2
+        end
+        item
+          Expanded = False
+          FieldName = 'empstatus'
+          Title.Caption = 'Emp.Status'
+          Width = 74
+          Visible = True
+          FloatPrecision = 12
+          FloatDigits = 2
+        end>
+    end
+  end
+  object AdvPanel1: TAdvPanel
+    Left = 0
+    Top = 0
+    Width = 656
+    Height = 30
+    Align = alTop
+    BevelOuter = bvNone
+    BorderStyle = bsSingle
+    Color = 16744576
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    UseDockManager = True
+    Version = '2.3.0.0'
+    BorderColor = 7171437
+    Caption.Color = 12566463
+    Caption.ColorTo = 9539985
+    Caption.Font.Charset = DEFAULT_CHARSET
+    Caption.Font.Color = clWindowText
+    Caption.Font.Height = -11
+    Caption.Font.Name = 'Tahoma'
+    Caption.Font.Style = []
+    Caption.GradientDirection = gdVertical
+    Caption.Indent = 2
+    Caption.ShadeLight = 255
+    CollapsColor = 8404992
+    CollapsDelay = 2
+    ColorTo = 8404992
+    ColorMirror = 8404992
+    ColorMirrorTo = 8404992
+    ShadowColor = clBlack
+    ShadowOffset = 0
+    StatusBar.BorderColor = 12566463
+    StatusBar.BorderStyle = bsSingle
+    StatusBar.Font.Charset = DEFAULT_CHARSET
+    StatusBar.Font.Color = 14145494
+    StatusBar.Font.Height = -11
+    StatusBar.Font.Name = 'Tahoma'
+    StatusBar.Font.Style = []
+    StatusBar.Color = 12566463
+    StatusBar.ColorTo = 9539985
+    StatusBar.GradientDirection = gdVertical
+    Text = ''
+    ExplicitWidth = 646
+    FullHeight = 200
+    object AdvSmoothLabel1: TAdvSmoothLabel
+      Left = 0
+      Top = -6
+      Width = 280
+      Height = 33
+      Fill.ColorMirror = clNone
+      Fill.ColorMirrorTo = clNone
+      Fill.GradientType = gtVertical
+      Fill.GradientMirrorType = gtSolid
+      Fill.BorderColor = clNone
+      Fill.Rounding = 0
+      Fill.ShadowOffset = 0
+      Fill.Glow = gmNone
+      Caption.Text = '    Search Unpaid Job Orders'
+      Caption.Location = plBottomLeft
+      Caption.Font.Charset = DEFAULT_CHARSET
+      Caption.Font.Color = clWindowText
+      Caption.Font.Height = -15
+      Caption.Font.Name = 'Arial Black'
+      Caption.Font.Style = [fsBold]
+      Caption.ColorStart = 16744703
+      Caption.ColorEnd = clWhite
+      CaptionShadow.Text = '    Search Unpaid Job Orders'
+      CaptionShadow.Font.Charset = DEFAULT_CHARSET
+      CaptionShadow.Font.Color = clWindowText
+      CaptionShadow.Font.Height = -27
+      CaptionShadow.Font.Name = 'Tahoma'
+      CaptionShadow.Font.Style = []
+      Version = '1.6.0.2'
+    end
+  end
+  object AdvPanel3: TAdvPanel
+    Left = 0
+    Top = 347
+    Width = 656
+    Height = 61
+    Align = alBottom
+    BorderStyle = bsSingle
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    UseDockManager = True
+    Version = '2.3.0.0'
+    Caption.Color = clHighlight
+    Caption.ColorTo = clNone
+    Caption.Font.Charset = DEFAULT_CHARSET
+    Caption.Font.Color = clWindowText
+    Caption.Font.Height = -11
+    Caption.Font.Name = 'Tahoma'
+    Caption.Font.Style = []
+    StatusBar.Font.Charset = DEFAULT_CHARSET
+    StatusBar.Font.Color = clWindowText
+    StatusBar.Font.Height = -11
+    StatusBar.Font.Name = 'Tahoma'
+    StatusBar.Font.Style = []
+    Text = ''
+    ExplicitTop = 337
+    ExplicitWidth = 646
+    FullHeight = 200
+    object AdvSmoothButton9: TAdvSmoothButton
+      Left = 464
+      Top = 14
+      Width = 85
+      Height = 30
+      Appearance.PictureAlignment = taCenter
+      Appearance.Font.Charset = DEFAULT_CHARSET
+      Appearance.Font.Color = clBlack
+      Appearance.Font.Height = -11
+      Appearance.Font.Name = 'Tahoma'
+      Appearance.Font.Style = [fsBold]
+      Appearance.Spacing = 1
+      Appearance.Rounding = 2
+      Status.Caption = '0'
+      Status.Appearance.Fill.Color = clRed
+      Status.Appearance.Fill.ColorMirror = clNone
+      Status.Appearance.Fill.ColorMirrorTo = clNone
+      Status.Appearance.Fill.GradientType = gtSolid
+      Status.Appearance.Fill.GradientMirrorType = gtSolid
+      Status.Appearance.Fill.BorderColor = clGray
+      Status.Appearance.Fill.Rounding = 0
+      Status.Appearance.Fill.ShadowOffset = 0
+      Status.Appearance.Fill.Glow = gmNone
+      Status.Appearance.Font.Charset = DEFAULT_CHARSET
+      Status.Appearance.Font.Color = clWhite
+      Status.Appearance.Font.Height = -11
+      Status.Appearance.Font.Name = 'Tahoma'
+      Status.Appearance.Font.Style = []
+      BevelColor = clTeal
+      Caption = 'Select'
+      Color = 16777088
+      ParentFont = False
+      Picture.Data = {
+        89504E470D0A1A0A0000000D49484452000000180000001308060000008AB0CD
+        3B000000097048597300000B1300000B1301009A9C18000000206348524D0000
+        7A25000080830000F9FF000080E9000075300000EA6000003A980000176F925F
+        C546000001054944415478DAD4D53D4E03311086E167238440342C42D0D25013
+        7E1B1ACEC0113811429429296968F83F051D04100DE206880AD324C831D6EE46
+        D9148CE4C285BF773CF38D5D84104C333AA61C33F1A6288A49B496F085CF91AA
+        84107ED704B1884B9CA033A2D9026005D7088375DC266019579178C0735B8012
+        37A938F6EA006BD8AA115FC55D22FE829D3F7D4D001B78C0070E2A6A7E9BC97C
+        336B9C04F01A1D7ACF40CA4CE6FD61E64D00A7C9E137EC4765B9CF946537BD62
+        15600EBD8CC851C62D7D747335AC6BF22CCE12B1EF64FF54658426369DC77922
+        1A3774BBCA624DE7A0C44526F36EDD808C33680B11E431B6625B00581FBC3587
+        4D473CD62CFEFD87F33300CA4E54AF1E0606940000000049454E44AE426082}
+      DisabledColor = 8404992
+      TabOrder = 0
+      ShowFocus = False
+      Version = '2.0.1.0'
+    end
+    object AdvSmoothButton1: TAdvSmoothButton
+      Left = 555
+      Top = 15
+      Width = 81
+      Height = 30
+      Appearance.PictureAlignment = taCenter
+      Appearance.Font.Charset = DEFAULT_CHARSET
+      Appearance.Font.Color = clBlack
+      Appearance.Font.Height = -11
+      Appearance.Font.Name = 'Tahoma'
+      Appearance.Font.Style = [fsBold]
+      Appearance.Spacing = 1
+      Appearance.Rounding = 2
+      Status.Caption = '0'
+      Status.Appearance.Fill.Color = clRed
+      Status.Appearance.Fill.ColorMirror = clNone
+      Status.Appearance.Fill.ColorMirrorTo = clNone
+      Status.Appearance.Fill.GradientType = gtSolid
+      Status.Appearance.Fill.GradientMirrorType = gtSolid
+      Status.Appearance.Fill.BorderColor = clGray
+      Status.Appearance.Fill.Rounding = 0
+      Status.Appearance.Fill.ShadowOffset = 0
+      Status.Appearance.Fill.Glow = gmNone
+      Status.Appearance.Font.Charset = DEFAULT_CHARSET
+      Status.Appearance.Font.Color = clWhite
+      Status.Appearance.Font.Height = -11
+      Status.Appearance.Font.Name = 'Tahoma'
+      Status.Appearance.Font.Style = []
+      BevelColor = clTeal
+      Caption = 'Close'
+      Color = 16777088
+      ParentFont = False
+      Picture.Data = {
+        89504E470D0A1A0A0000000D49484452000000100000001008060000001FF3FF
+        61000000097048597300000B1300000B1301009A9C18000000206348524D0000
+        7A25000080830000F9FF000080E9000075300000EA6000003A980000176F925F
+        C546000000BC4944415478DAC4934D0E82301085BF51240A5C0A36E265F1F708
+        269A78A8E78212DA5288090B9BCC66DEBC2F9D99D624B1E66C58794280598559
+        8B5936A934CB313B61560679497D4025F80824B80A724FCB050FA7BD05C5A0F9
+        80D615288084E621EA142073A618728B729D603B058C578D21B179E77B42C032
+        64629634BB46FB31976CE1BED0C279BE85F4B43B678A079BA500C764CF7D5C22
+        AD49010AC12B39B01E320CF62938CCADB11434FE9EA377520BF67EDEFEFE1BBF
+        0300FD675A136B6939390000000049454E44AE426082}
+      DisabledColor = 8404992
+      TabOrder = 1
+      ShowFocus = False
+      Version = '2.0.1.0'
+      OnClick = AdvSmoothButton1Click
+    end
+  end
+  object empQ: TMyQuery
+    Connection = PayrollData.MyConnection1
+    SQL.Strings = (
+      'Select'
+      #9' idemployee,'
+      #9' empnumber,'#9' '
+      #9' concat(firstname,'#39' '#39',middleinitial,'#39', '#39',lastname) as name,'
+      #9' departmentname as department,'
+      #9' case employeestatus'
+      #9'   when '#39'C'#39' then '#39'Casual'#39
+      #9'   when '#39'R'#39' then '#39'Regular'#39
+      '           when '#39'B'#39' then '#39'Board'#39
+      #9'   ELSE '#39#39
+      #9' END as empstatus '
+      ' from employee'
+      
+        ' where concat(firstname,'#39' '#39',middleinitial,'#39', '#39',lastname) like :n' +
+        'ame')
+    Left = 336
+    Top = 46
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'name'
+        Value = nil
+      end>
+    object empQidemployee: TLongWordField
+      FieldName = 'idemployee'
+    end
+    object empQempnumber: TStringField
+      FieldName = 'empnumber'
+      Size = 15
+    end
+    object empQname: TStringField
+      FieldName = 'name'
+      Size = 68
+    end
+    object empQdepartment: TStringField
+      FieldName = 'department'
+      Size = 40
+    end
+    object empQempstatus: TStringField
+      FieldName = 'empstatus'
+      Size = 7
+    end
+  end
+  object empDS: TMyDataSource
+    DataSet = empQ
+    Left = 376
+    Top = 48
+  end
+end
